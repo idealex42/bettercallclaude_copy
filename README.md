@@ -6,7 +6,7 @@ BetterCallClaude is a plugin for legal professionals working in Cowork or Claude
 
 The plugin covers the full spectrum of Swiss legal work: BGE/ATF/DTF precedent research, case strategy development with risk assessment, adversarial legal analysis, compliance and data protection advisory, fiscal and corporate law expertise, real estate law, legal drafting with jurisdiction-aware templates, legal translation, and citation verification across all 26 Swiss cantons. Privacy compliance with Anwaltsgeheimnis (Art. 321 StGB) is enforced automatically through a pre-tool-use hook that detects privileged content before it leaves the local environment.
 
-**Version**: 3.0.0 -- 17 agents, 16 commands, 9 skills, 5 MCP servers.
+**Version**: 3.1.0 -- 18 agents, 17 commands, 10 skills, 5 MCP servers.
 
 > Love BetterCallClaude? Support the project — [**Buy me a coffee**](https://buymeacoffee.com/federicocesconi) ☕
 
@@ -54,6 +54,7 @@ claude --plugin-dir .
 | `/bettercallclaude:federal` | Analyze a legal question under federal Swiss law (ZGB, OR, StGB, BV, and related federal statutes). |
 | `/bettercallclaude:cantonal` | Analyze a legal question under cantonal law for a specific canton. |
 | `/bettercallclaude:adversarial` | Run three-agent adversarial analysis -- advocate builds the case, adversary challenges it, judicial analyst synthesizes. |
+| `/bettercallclaude:briefing` | Structured pre-execution briefing session -- assembles a specialist panel, collects case context, and builds an execution plan before agents start working. Supports resume and depth control. |
 | `/bettercallclaude:workflow` | Define and execute multi-agent legal workflows (due diligence, litigation prep, contract lifecycle, real estate closing). |
 | `/bettercallclaude:translate` | Translate Swiss legal documents between DE, FR, IT, and EN while preserving legal terminology precision. |
 | `/bettercallclaude:doc-analyze` | Analyze Swiss legal documents -- identify legal issues, extract key clauses, verify citations, assess compliance. |
@@ -82,6 +83,12 @@ claude --plugin-dir .
 /bettercallclaude:doc-analyze @contract.pdf Review this commercial lease agreement
 
 /bettercallclaude:cantonal ZH Commercial court jurisdiction for contract disputes over CHF 30k
+
+/bettercallclaude:briefing Prepare full litigation for Art. 97 OR breach, CHF 500K, Zurich
+
+/bettercallclaude:briefing --resume brief_20260225_contract
+
+/bettercallclaude:legal --skip-briefing Quick BGE search for Art. 41 OR
 ```
 
 ---
@@ -101,12 +108,13 @@ Skills are activated automatically when Claude detects relevant legal context in
 | `adversarial-analysis` | Three-agent adversarial methodology (advocate/adversary/judicial), argument scoring, objectivity validation, and Erwagung synthesis structure. |
 | `compliance-frameworks` | FINMA supervision, GwG/AMLA anti-money laundering, FIDLEG/FINIG financial institution licensing, banking secrecy, and cross-border compliance. |
 | `data-protection-law` | nDSG/FADP framework, GDPR adequacy, cantonal data protection laws (IDG/KDSG/LIPAD), DPIA methodology, and cross-border data transfers. |
+| `legal-briefing` | Auto-detects complex queries that benefit from structured intake before agent execution. Suggests briefing sessions when complexity, ambiguity, or pipeline coordination is detected. |
 
 ---
 
 ## Agents
 
-The plugin includes 17 specialized subagents that handle complex multi-step legal workflows.
+The plugin includes 18 specialized subagents that handle complex multi-step legal workflows.
 
 ### Core Agents
 
@@ -131,11 +139,12 @@ The plugin includes 17 specialized subagents that handle complex multi-step lega
 | **Legal Translator** | Legal translation DE/FR/IT/EN, terminology consistency, official Swiss term registers, bilingual document production. |
 | **Cantonal Law Expert** | All 26 cantons, cantonal constitutions, intercantonal concordats, cantonal court systems, cantonal procedural specifics. |
 
-### Orchestration and Adversarial Agents
+### Briefing and Orchestration Agents
 
 | Agent | Description |
 |-------|-------------|
-| **Workflow Orchestrator** | Multi-agent pipeline coordination, workflow templates (due diligence, litigation prep, contract lifecycle, real estate closing), agent routing. |
+| **Briefing Coordinator** | Pre-execution intake through multi-agent panel consultation. Classifies queries, selects 2-5 specialist panelists, collects domain-specific questions, builds structured execution plans with checkpoints, and persists state for cross-session recovery. |
+| **Workflow Orchestrator** | Multi-agent pipeline coordination, workflow templates (due diligence, litigation prep, contract lifecycle, real estate closing), agent routing. Now supports briefing-sourced execution with checkpoint pause/resume. |
 | **Advocate** | Builds the strongest possible case in favor of a legal position with supporting BGE precedents and doctrine. |
 | **Adversary** | Challenges a legal position by finding weaknesses, counter-precedents, and opposing arguments. |
 | **Judicial Analyst** | Neutral synthesis of advocate and adversary positions using Swiss Erwagung (consideration) structure with risk probabilities. |
@@ -162,6 +171,47 @@ The workflow orchestrator supports predefined pipelines:
 | `real-estate-closing` | Real Estate -> Compliance -> Fiscal -> Drafter | Real estate transaction with regulatory and tax analysis. |
 
 Invoke with `/bettercallclaude:workflow` followed by the workflow name and case description.
+
+### Briefing Session (New in v3.1.0)
+
+Complex legal matters often involve multiple domains, jurisdictions, and competing considerations that a single query cannot fully capture. BetterCallClaude previously used a one-shot classification: the `/legal` gateway would read your query, score its complexity, and immediately route to agents. This worked well for focused questions but led to misrouted or incomplete analysis when the initial query lacked critical context.
+
+The **briefing session** adds a collaborative intake phase between your query and agent execution. Instead of guessing what you need, the system assembles a panel of specialist agents, asks you targeted questions, and builds a precise execution plan before any work begins.
+
+**How it works**:
+
+1. **Adaptive activation** -- The `/legal` gateway scores your query's complexity (1-10). Simple queries (1-3) route directly as before. Moderate queries (4-6) trigger 2-3 inline clarifying questions. Complex queries (7-10) enter a full briefing session with a specialist panel.
+
+2. **Specialist panel** -- For complex queries, the briefing coordinator selects 2-5 agents from a pool of 10 specialists (researcher, strategist, procedure, risk, compliance, drafter, corporate, fiscal, real estate, cantonal). Each panelist is spawned as a real subagent and returns domain-specific questions based on your query.
+
+3. **Transparent attribution** -- Every question is labeled with which specialist needs the answer and why. You see exactly who is asking (e.g., "Needed by: ⏱️ Procedure (deadline calculation), 📊 Risk (exposure estimate)").
+
+4. **Structured execution plan** -- After 1-3 rounds of questions, the system builds a step-by-step execution plan showing which agents will run, in what order, with what dependencies, and where checkpoints will pause for your review.
+
+5. **Interactive refinement** -- You can modify the plan before approving it: add or remove agents, adjust the order, change checkpoint placement, or ask why a particular specialist was included.
+
+6. **Checkpoint execution** -- Once approved, the orchestrator executes the plan stage by stage, pausing at each checkpoint for you to review results, adjust the remaining plan, or save progress for later.
+
+7. **Cross-session persistence** -- Briefing state is saved to memory after each interaction. You can close the conversation and resume later with `/bettercallclaude:briefing --resume`. All your answers, the execution plan, and any completed stages are preserved.
+
+**Benefits**:
+
+- **Fewer misrouted queries** -- The panel catches missing context before agents start working, reducing wasted cycles and incorrect analysis.
+- **Precise execution plans** -- Instead of a generic pipeline, you get a tailored plan with the right agents in the right order for your specific matter.
+- **User control** -- You see and approve the plan before execution. No surprise agent spawning or unexpected output.
+- **Efficient for simple cases** -- Simple queries bypass the briefing entirely. The system only activates when complexity warrants it.
+- **Resumable workflows** -- Long-running matters can be paused at any checkpoint and resumed across sessions without losing progress.
+
+**Flags**:
+
+| Flag | Effect |
+|------|--------|
+| `--briefing` | Force full briefing session regardless of complexity |
+| `--skip-briefing` / `--direct` | Bypass briefing and route directly to agents |
+| `--depth quick` | Lightweight briefing: 2-3 questions, no panel |
+| `--depth deep` | Maximum panel size and question rounds |
+| `--resume [id]` | Resume a saved briefing session |
+| `--list` | List all saved briefing sessions |
 
 ---
 
@@ -334,9 +384,9 @@ npm run build:mcpb
 ```
 .claude-plugin/plugin.json   Plugin manifest
 .mcp.json                    MCP server configuration
-agents/                      17 agent definitions (markdown)
-commands/                    16 slash commands (markdown)
-skills/                      9 auto-activated skills (markdown)
+agents/                      18 agent definitions (markdown)
+commands/                    17 slash commands (markdown)
+skills/                      10 auto-activated skills (markdown)
 hooks/                       Privacy detection hook
 mcp-servers/                 Pre-compiled MCP server bundles (checked into git)
 mcp-servers-src/             TypeScript source for MCP servers
