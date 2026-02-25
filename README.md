@@ -8,6 +8,8 @@ The plugin covers the full spectrum of Swiss legal work: BGE/ATF/DTF precedent r
 
 **Version**: 3.0.0 -- 17 agents, 16 commands, 9 skills, 5 MCP servers.
 
+> Love BetterCallClaude? Support the project — [**Buy me a coffee**](https://buymeacoffee.com/federicocesconi) ☕
+
 ---
 
 ## Installation
@@ -301,6 +303,8 @@ GitHub: [fedec65/bettercallclaude](https://github.com/fedec65/bettercallclaude)
 ## License
 
 AGPL-3.0 -- See [LICENSE](LICENSE) for full terms.
+
+Built with love for the Swiss legal community. [Support the project ☕](https://buymeacoffee.com/federicocesconi)
 
 ---
 
