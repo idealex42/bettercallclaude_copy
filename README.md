@@ -18,7 +18,7 @@ BetterCallClaude can be installed through several channels.
 
 ### Claude Cowork (Recommended)
 
-Visit the installation page at **[bettercallclaude.ch/marketplace](https://bettercallclaude.ch/marketplace)** for guided setup instructions. The page walks you through installing the plugin directly in Claude Cowork with a few clicks.
+Visit the installation page at **[bettercallclaude.ai/desktop](https://bettercallclaude.ai/desktop)** for guided setup instructions. The page walks you through installing the plugin directly in Claude Cowork with a few clicks.
 
 ### From GitHub (Claude Code CLI)
 
