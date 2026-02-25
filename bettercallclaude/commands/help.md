@@ -18,7 +18,7 @@ BetterCallClaude provides Swiss legal intelligence through three interfaces:
 
 ---
 
-## Commands (16)
+## Commands (17)
 
 ### Core Commands
 
@@ -50,6 +50,7 @@ BetterCallClaude provides Swiss legal intelligence through three interfaces:
 | Command | Description |
 |---------|-------------|
 | `/bettercallclaude:workflow` | Define and execute multi-agent pipelines |
+| `/bettercallclaude:briefing` | Structured pre-execution briefing with specialist panel and plan building |
 | `/bettercallclaude:translate` | Translate legal documents between DE, FR, IT, EN |
 
 ### Reference Commands
@@ -63,7 +64,7 @@ BetterCallClaude provides Swiss legal intelligence through three interfaces:
 
 ---
 
-## Agents (17)
+## Agents (18)
 
 ### Core Pipeline Agents
 
@@ -90,11 +91,12 @@ BetterCallClaude provides Swiss legal intelligence through three interfaces:
 | advocate | Builds the strongest case for a position (adversarial mode) |
 | adversary | Challenges and stress-tests the case (adversarial mode) |
 | judicial | Synthesizes advocate and adversary into balanced assessment |
+| briefing | Pre-execution intake, specialist panel consultation, execution plan building |
 | orchestrator | Multi-agent pipeline coordination and workflow management |
 
 ---
 
-## Skills (9)
+## Skills (10)
 
 Skills activate automatically when Claude detects relevant context.
 
@@ -109,6 +111,7 @@ Skills activate automatically when Claude detects relevant context.
 | federal-law | Federal statute analysis, BV/ZGB/OR/StGB questions |
 | cantonal-law | Canton-specific legal questions |
 | multilingual-law | Multi-language legal terminology needs |
+| legal-briefing | Complex queries needing structured intake before agent execution |
 
 ---
 
@@ -149,6 +152,13 @@ Skills activate automatically when Claude detects relevant context.
 ### Adversarial Analysis
 ```
 /bettercallclaude:adversarial Tenant claims landlord breached Art. 259a OR
+```
+
+### Briefing Session
+```
+/bettercallclaude:briefing "Prepare full litigation for Art. 97 OR breach, CHF 500K, Zurich"
+/bettercallclaude:briefing --resume brief_20260225_contract
+/bettercallclaude:briefing --list
 ```
 
 ### Multi-Lingual

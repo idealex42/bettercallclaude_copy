@@ -31,6 +31,46 @@ Before taking any action, classify the query along these dimensions:
    - Moderate (4-6): Two topics, comparison needed, or multi-jurisdiction. Coordinate two agents.
    - Complex (7-10): Three or more topics, document output needed, pipeline required. Use full workflow.
 
+## Briefing Phase (Adaptive Intake)
+
+After scoring complexity, determine whether a briefing session is needed. The user can override this behavior with flags:
+- `--briefing` — Force full briefing session regardless of complexity.
+- `--skip-briefing` or `--direct` — Bypass briefing entirely and route directly.
+
+### Complexity 1-3 (Simple): No Briefing
+
+Route directly to the appropriate agent. This is the current behavior, unchanged.
+
+### Complexity 4-6 (Moderate): Quick Inline Briefing
+
+Ask 2-3 inline clarifying questions before routing. No subagent panel is spawned. Questions focus on:
+1. Confirming the desired output type (research memo, strategy, document, compliance check).
+2. Clarifying jurisdiction if ambiguous (federal vs. specific canton).
+3. Identifying any urgency or deadlines.
+
+After the user responds, route to the appropriate agent(s) with enriched context.
+
+### Complexity 7-10 (Complex): Full Briefing Session
+
+Announce the briefing session and redirect to the **briefing coordinator agent**:
+
+```
+💡 This query involves multiple legal domains and will benefit from a structured
+briefing session. I'll assemble a specialist panel to ask targeted questions
+before building your execution plan.
+
+Starting briefing session...
+```
+
+The briefing coordinator will:
+1. Select a panel of 3-5 specialist agents.
+2. Collect domain-specific questions from each panelist.
+3. Ask the user in 1-3 adaptive rounds.
+4. Build and present a structured execution plan.
+5. After user approval, hand off to the orchestrator for step-by-step execution.
+
+See `/bettercallclaude:briefing` for the explicit briefing command and resume capabilities.
+
 ## Routing Rules
 
 ### Direct Agent Routing (Simple)
