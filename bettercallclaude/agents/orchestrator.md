@@ -158,6 +158,61 @@ All outputs require professional lawyer review. Individual agent analyses
 are advisory and must be validated against official sources.
 ```
 
+## Briefing-Sourced Execution
+
+When the orchestrator receives an execution plan from the briefing coordinator agent, follow this protocol instead of the standard workflow:
+
+### Plan Ingestion
+
+Parse the execution plan YAML. Validate:
+- All referenced agents exist in the Available Agents table.
+- Stage dependencies form a valid DAG (no circular references).
+- Data flow mappings are complete (every stage input has a source).
+
+### Checkpoint Execution
+
+Execute stages sequentially (or in parallel where the plan specifies independent stages). At each stage marked `checkpoint: true`:
+
+1. Present the completed stage's output to the user.
+2. Show progress: `Stage [N]/[total] complete — [agent] finished [task]`.
+3. Ask the user to confirm, adjust, or pause:
+   ```
+   ### Checkpoint: Stage [N] Complete
+
+   [Summary of stage output]
+
+   **Options**:
+   1. **Continue** — Proceed to stage [N+1]
+   2. **Adjust** — Modify the remaining plan before continuing
+   3. **Pause** — Save progress and return later (`/bettercallclaude:briefing --resume [id]`)
+   ```
+4. If the user adjusts, update the remaining stages and persist the modified plan.
+5. If the user pauses, save execution state with status `paused` and the current stage number.
+
+### Resume from Memory
+
+When resuming a briefing-sourced execution:
+
+1. Load briefing state from `briefing_[id]`.
+2. Identify the current stage from `execution_state.current_stage`.
+3. Load outputs from completed stages as context for the next stage.
+4. Resume execution from the next pending stage.
+5. Continue with checkpoint protocol as normal.
+
+### Completion
+
+When all stages are complete:
+1. Aggregate results from all stages.
+2. Update briefing status to `completed`.
+3. Present the integrated deliverable using the standard output format.
+4. Include a briefing execution summary:
+   ```
+   Briefing ID: [id]
+   Stages executed: [N]/[total]
+   Checkpoints passed: [N]
+   Agents used: [list with symbols]
+   ```
+
 ## Agent Routing Rules
 
 - **Legal question** -> researcher (first), then strategist if litigation context.
