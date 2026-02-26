@@ -28,6 +28,43 @@ Install the plugin directly from GitHub:
 claude plugin add fedec65/bettercallclaude
 ```
 
+### Windows Installation (Claude Code CLI)
+
+Claude Code on Windows requires [Git for Windows](https://git-scm.com/downloads/win). Install it first, then install Claude Code using one of these methods:
+
+**PowerShell:**
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+**CMD:**
+
+```batch
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+**WinGet:**
+
+```powershell
+winget install Anthropic.ClaudeCode
+```
+
+After installation, install the plugin:
+
+```
+claude plugin add fedec65/bettercallclaude
+```
+
+You can launch `claude` from PowerShell, CMD, or Git Bash. You do not need to run PowerShell as Administrator.
+
+> **WSL users**: Both WSL 1 and WSL 2 are supported. Use `curl -fsSL https://claude.ai/install.sh | bash` inside your WSL terminal, then install the plugin as above.
+
+> **Git Bash not found?** If Claude Code cannot locate your Git Bash installation, add this to your `settings.json`:
+> ```json
+> { "env": { "CLAUDE_CODE_GIT_BASH_PATH": "C:\\Program Files\\Git\\bin\\bash.exe" } }
+> ```
+
 ### Manual Installation (Claude Code CLI)
 
 Clone the repository and point Claude Code to the repo root:
