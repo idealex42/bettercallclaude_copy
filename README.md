@@ -213,6 +213,36 @@ The **briefing session** adds a collaborative intake phase between your query an
 | `--resume [id]` | Resume a saved briefing session |
 | `--list` | List all saved briefing sessions |
 
+**Usage examples**:
+
+```
+# Complex matter -- triggers full briefing automatically via /legal gateway
+/bettercallclaude:legal Prepare litigation for Art. 97 OR breach, CHF 500K claim,
+  Zurich Commercial Court, employer is a regulated financial institution
+
+# Explicit briefing -- forces briefing even for simpler queries
+/bettercallclaude:briefing Is Art. 340 OR non-compete enforceable for a 2-year period?
+
+# Deep briefing -- maximum panel size and question rounds
+/bettercallclaude:briefing --depth deep Cross-border M&A with tax structuring,
+  target in ZH, buyer in GE, FINMA-regulated entities on both sides
+
+# Quick briefing -- lightweight intake, 2-3 questions, no panel
+/bettercallclaude:briefing --depth quick Review my commercial lease for compliance
+
+# Resume a saved briefing from a previous session
+/bettercallclaude:briefing --resume brief_20260225_litigation
+
+# List all saved briefing sessions
+/bettercallclaude:briefing --list
+
+# Skip briefing -- bypass intake and route directly to agents
+/bettercallclaude:legal --skip-briefing Search BGE for Art. 41 OR tort liability
+
+# Force briefing on a query that would normally route directly
+/bettercallclaude:legal --briefing Find BGE on Art. 97 OR foreseeability
+```
+
 ---
 
 ## Language Support
