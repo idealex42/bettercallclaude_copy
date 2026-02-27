@@ -14,13 +14,13 @@ Output the following formatted block:
 ======================================================
   BetterCallClaude - Swiss Legal Intelligence Plugin
 ======================================================
-  Version:      2.0.0
+  Version:      3.1.0
   Format:       Claude Code Plugin (Cowork compatible)
   Author:       Federico Cesconi
   License:      MIT
 ======================================================
 
-  COMMANDS (16)
+  COMMANDS (17)
   -------------
   [x] legal          - Intelligent gateway and router
   [x] research       - BGE/ATF/DTF precedent search
@@ -34,27 +34,28 @@ Output the following formatted block:
   [x] validate       - Batch citation validation
   [x] adversarial    - Three-agent adversarial analysis
   [x] workflow       - Multi-agent pipeline execution
+  [x] briefing       - Structured pre-execution briefing
   [x] translate      - Legal translation DE/FR/IT/EN
   [x] setup          - MCP server configuration
   [x] version        - This status display
   [x] help           - Command reference
 
-  AGENTS (17)
+  AGENTS (18)
   -----------
   [x] researcher      [x] strategist     [x] drafter
   [x] citation        [x] compliance     [x] data-protection
   [x] risk            [x] procedure      [x] translator
   [x] fiscal          [x] corporate      [x] cantonal
   [x] realestate      [x] advocate       [x] adversary
-  [x] judicial        [x] orchestrator
+  [x] judicial        [x] briefing       [x] orchestrator
 
-  SKILLS (9)
+  SKILLS (10)
   ----------
   [x] swiss-legal-research     [x] swiss-legal-drafting
   [x] swiss-legal-strategy     [x] swiss-citation-formats
   [x] swiss-jurisdictions      [x] privacy-routing
   [x] federal-law              [x] cantonal-law
-  [x] multilingual-law
+  [x] multilingual-law         [x] legal-briefing
 
   MCP SERVERS (5)
   ---------------
