@@ -52,9 +52,9 @@ Skip to Step 5 (Requirements Check).
 
 ### If any servers are missing:
 
-**YOU MUST EXECUTE Steps 3a, 3b, and 3c below using the Bash tool. DO NOT skip ahead to the fallback section. DO NOT just show the user text instructions. You must RUN the commands yourself to generate the installer file.**
+**YOU MUST EXECUTE Steps 3a and 3b below. If 3b succeeds (direct install), STOP. If 3b fails, continue to Steps 3c and 3d. DO NOT skip ahead to the fallback section. DO NOT just show the user text instructions. You must RUN the commands yourself.**
 
-Background: MCP servers in Cowork Desktop run in a sandboxed VM without network access. The solution is to generate a `.command` installer script that the user runs on their host Mac (outside Cowork). The `~/.claude/` directory is shared between the VM and the host, so you can write the file here and the user can execute it there.
+Background: MCP servers in Cowork Desktop run in a sandboxed VM without network access. The setup will first try to install servers directly into Claude Desktop's config file. If that path is not accessible, it falls back to generating a `.command` installer script that the user runs on their host Mac. The `~/.claude/` directory is shared between the VM and the host.
 
 #### Step 3a: Locate the MCP server directory (EXECUTE NOW)
 
@@ -97,7 +97,7 @@ echo "SERVER_DIR=$SERVER_DIR"
 echo "IS_COWORK=$IS_COWORK"
 ```
 
-If `SERVER_DIR` is empty, tell the user the plugin may not be fully installed and skip to Step 3d (fallback). Otherwise, verify all 5 servers exist:
+If `SERVER_DIR` is empty, tell the user the plugin may not be fully installed and skip to Step 3e (fallback). Otherwise, verify all 5 servers exist:
 
 ```bash
 for s in entscheidsuche bge-search legal-citations fedlex-sparql onlinekommentar; do
@@ -105,9 +105,66 @@ for s in entscheidsuche bge-search legal-citations fedlex-sparql onlinekommentar
 done
 ```
 
-If any are missing, skip to Step 3d. Otherwise proceed to Step 3b.
+If any are missing, skip to Step 3e. Otherwise proceed to Step 3b.
 
-#### Step 3b: Generate the installer script (EXECUTE NOW)
+#### Step 3b: Try direct config installation (EXECUTE NOW)
+
+Before generating an installer script, try to install servers directly into Claude Desktop's config file. This eliminates the need for the user to run any Terminal commands.
+
+```bash
+# Determine config path
+if [ "$(uname)" = "Darwin" ]; then
+  CONFIG_PATH="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
+else
+  CONFIG_PATH="$HOME/.config/Claude/claude_desktop_config.json"
+fi
+
+# Try direct config modification via Node.js
+node -e "
+const fs = require('fs');
+const path = require('path');
+const configPath = process.argv[1];
+const serverDir = process.argv[2];
+try {
+  fs.mkdirSync(path.dirname(configPath), { recursive: true });
+  let config = {};
+  try { config = JSON.parse(fs.readFileSync(configPath, 'utf8')); } catch(e) {}
+  // Backup existing config
+  if (Object.keys(config).length > 0) {
+    const ts = new Date().toISOString().replace(/[:.]/g, '-');
+    fs.writeFileSync(configPath + '.bak.' + ts, JSON.stringify(config, null, 2));
+    console.log('BACKUP: ' + configPath + '.bak.' + ts);
+  }
+  // Merge servers
+  if (!config.mcpServers) config.mcpServers = {};
+  ['entscheidsuche','bge-search','legal-citations','fedlex-sparql','onlinekommentar'].forEach(s => {
+    config.mcpServers['bettercallclaude-' + s] = {
+      command: 'node',
+      args: [path.join(serverDir, s, 'dist', 'index.js')]
+    };
+  });
+  fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + '\n');
+  const count = Object.keys(config.mcpServers).filter(k => k.startsWith('bettercallclaude')).length;
+  console.log('DIRECT_INSTALL_OK: ' + count + ' servers installed');
+} catch(e) {
+  console.log('DIRECT_INSTALL_FAIL: ' + e.message);
+}
+" "$CONFIG_PATH" "$SERVER_DIR"
+```
+
+**If the output contains `DIRECT_INSTALL_OK`**: Tell the user:
+
+```
+MCP servers have been installed directly into Claude Desktop's config file.
+
+Please restart Claude Desktop, then re-run /bettercallclaude:setup to verify all 5 servers are connected.
+```
+
+**STOP HERE** — do not generate the `.command` file or show any other instructions.
+
+**If the output contains `DIRECT_INSTALL_FAIL`**: The config file is not accessible from this environment. Proceed silently to Step 3c to generate the installer script as a fallback.
+
+#### Step 3c: Generate the installer script (EXECUTE NOW)
 
 You MUST run this Bash command to write the `.command` file. Replace `<ACTUAL_SERVER_DIR>` with the absolute path found in Step 3a.
 
@@ -193,7 +250,7 @@ Verify the file was written correctly:
 head -5 ~/.claude/install-bcc-servers.command
 ```
 
-#### Step 3c: Show the user ONE simple instruction
+#### Step 3d: Show the user ONE simple instruction
 
 After successfully generating the file, tell the user ONLY this:
 
@@ -207,11 +264,11 @@ Open Terminal on your Mac and paste this single command:
 After it finishes, restart Claude Desktop and re-run /bettercallclaude:setup to verify.
 ```
 
-DO NOT show any other installation options at this point. Stop here. Only proceed to Step 3d if the user reports a problem.
+DO NOT show any other installation options at this point. Stop here. Only proceed to Step 3e if the user reports a problem.
 
-#### Step 3d: Fallback (ONLY if Steps 3a-3c failed)
+#### Step 3e: Fallback (ONLY if Steps 3a-3d failed)
 
-Only show these alternatives if Step 3a could not find the server directory, or if the user explicitly reports that the `.command` approach did not work:
+Only show these alternatives if Steps 3a-3d could not install the servers, or if the user explicitly reports that neither the direct install nor the `.command` approach worked:
 
 **Option A — MCPB bundles**: Download and double-click `.mcpb` files from the latest release:
 
