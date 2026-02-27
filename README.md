@@ -97,6 +97,7 @@ claude --plugin-dir .
 | `/bettercallclaude:doc-analyze` | Analyze Swiss legal documents -- identify legal issues, extract key clauses, verify citations, assess compliance. |
 | `/bettercallclaude:help` | Show complete command reference, available agents, skills, and usage examples. |
 | `/bettercallclaude:version` | Display plugin version, installed components, and system status. |
+| `/bettercallclaude:setup` | Check MCP server status and auto-install servers to Claude Desktop if needed. |
 
 ### Usage examples
 
