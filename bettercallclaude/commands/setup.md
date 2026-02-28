@@ -52,13 +52,150 @@ Skip to Step 5 (Requirements Check).
 
 ### If any servers are missing:
 
-**YOU MUST EXECUTE Steps 3a and 3b below. If 3b succeeds (direct install), STOP. If 3b fails, continue to Steps 3c and 3d. DO NOT skip ahead to the fallback section. DO NOT just show the user text instructions. You must RUN the commands yourself.**
+**YOU MUST EXECUTE the steps below in order. Start with Step 3a to detect the environment, then follow the appropriate path. DO NOT skip ahead to the fallback section. DO NOT just show the user text instructions. You must RUN the commands yourself.**
 
-Background: MCP servers in Cowork Desktop run in a sandboxed VM without network access. The setup will first try to install servers directly into Claude Desktop's config file. If that path is not accessible, it falls back to generating a `.command` installer script that the user runs on their host Mac. The `~/.claude/` directory is shared between the VM and the host.
+Background: MCP servers in Cowork Desktop run in a sandboxed VM without network access. The setup detects the environment and uses the best available method to install servers into Claude Desktop's host config file.
 
-#### Step 3a: Locate the MCP server directory (EXECUTE NOW)
+#### Step 3a: Detect environment (EXECUTE NOW)
 
-Run these Bash commands NOW to find the `mcp-servers` directory. Do not skip this step.
+Check whether the `mcp__Control_your_Mac__osascript` tool is available in your current tool list. This tool is only present in Cowork Desktop sessions where the "Control your Mac" MCP server is enabled.
+
+- **If `mcp__Control_your_Mac__osascript` IS available**: You are in Cowork Desktop with host Mac access. Proceed to **Step 3b** (osascript install).
+- **If `mcp__Control_your_Mac__osascript` is NOT available**: You are in Claude Code CLI or a Cowork session without host access. Skip to **Step 3c** (direct install fallback).
+
+#### Step 3b: Install via osascript — Cowork Desktop (EXECUTE NOW)
+
+This method uses the `mcp__Control_your_Mac__osascript` tool to run shell commands on the HOST Mac, bypassing the Cowork VM sandbox. Execute each sub-step in order. If any sub-step fails, skip to Step 3c.
+
+**Step 3b-i: Get the host $HOME path**
+
+Call the osascript tool with:
+```applescript
+do shell script "echo $HOME"
+```
+
+Store the result as `HOST_HOME` (e.g., `/Users/username`). You will need this for constructing absolute paths.
+
+**Step 3b-ii: Find the plugin's MCP servers on the host**
+
+Call the osascript tool with:
+```applescript
+do shell script "find ~/.claude -path '*/bettercallclaude*/mcp-servers/entscheidsuche/dist/index.js' 2>/dev/null | sort -V | tail -1"
+```
+
+This searches the host's `~/.claude/` directory (which includes the plugin cache) for the entscheidsuche server binary. The result is the full path to one server's `index.js`.
+
+If the result is empty, the plugin cache may not exist on the host yet. Skip to Step 3c.
+
+Extract the base `mcp-servers` directory from the result by removing the `/entscheidsuche/dist/index.js` suffix. Store this as `FOUND_SERVERS_DIR`.
+
+**Step 3b-iii: Copy servers to a stable host location**
+
+The plugin cache path may change between Cowork sessions. Copy servers to a stable location that persists across sessions.
+
+Call the osascript tool with (replace `<FOUND_SERVERS_DIR>` with the actual path from Step 3b-ii):
+```applescript
+do shell script "mkdir -p ~/.claude/bettercallclaude-servers && cp -R <FOUND_SERVERS_DIR>/* ~/.claude/bettercallclaude-servers/"
+```
+
+The stable server path is now: `<HOST_HOME>/.claude/bettercallclaude-servers`
+
+Verify the copy succeeded by calling the osascript tool with:
+```applescript
+do shell script "ls ~/.claude/bettercallclaude-servers/entscheidsuche/dist/index.js ~/.claude/bettercallclaude-servers/bge-search/dist/index.js ~/.claude/bettercallclaude-servers/legal-citations/dist/index.js ~/.claude/bettercallclaude-servers/fedlex-sparql/dist/index.js ~/.claude/bettercallclaude-servers/onlinekommentar/dist/index.js 2>&1"
+```
+
+If any files are missing, skip to Step 3c.
+
+**Step 3b-iv: Read the existing Claude Desktop config**
+
+Call the osascript tool with:
+```applescript
+do shell script "cat ~/Library/Application\\ Support/Claude/claude_desktop_config.json 2>/dev/null || echo '{}'"
+```
+
+Parse the returned JSON string in your context. This is the existing Claude Desktop configuration. **You MUST preserve all existing entries** — only add or update the 5 BetterCallClaude server entries.
+
+**Step 3b-v: Merge the server entries**
+
+In your context, parse the existing config JSON and merge in the 5 server entries. Each entry uses the absolute path with the `HOST_HOME` value from Step 3b-i:
+
+```json
+{
+  "mcpServers": {
+    "...existing entries preserved...",
+    "bettercallclaude-entscheidsuche": {
+      "command": "node",
+      "args": ["<HOST_HOME>/.claude/bettercallclaude-servers/entscheidsuche/dist/index.js"]
+    },
+    "bettercallclaude-bge-search": {
+      "command": "node",
+      "args": ["<HOST_HOME>/.claude/bettercallclaude-servers/bge-search/dist/index.js"]
+    },
+    "bettercallclaude-legal-citations": {
+      "command": "node",
+      "args": ["<HOST_HOME>/.claude/bettercallclaude-servers/legal-citations/dist/index.js"]
+    },
+    "bettercallclaude-fedlex-sparql": {
+      "command": "node",
+      "args": ["<HOST_HOME>/.claude/bettercallclaude-servers/fedlex-sparql/dist/index.js"]
+    },
+    "bettercallclaude-onlinekommentar": {
+      "command": "node",
+      "args": ["<HOST_HOME>/.claude/bettercallclaude-servers/onlinekommentar/dist/index.js"]
+    }
+  }
+}
+```
+
+Replace `<HOST_HOME>` with the actual value from Step 3b-i (e.g., `/Users/username`). Ensure the merged JSON is valid.
+
+**Step 3b-vi: Write the merged config back**
+
+First, create a backup of the existing config. Call the osascript tool with:
+```applescript
+do shell script "cp ~/Library/Application\\ Support/Claude/claude_desktop_config.json ~/Library/Application\\ Support/Claude/claude_desktop_config.json.bak.$(date +%Y%m%d-%H%M%S) 2>/dev/null; echo 'backup done'"
+```
+
+Then write the merged config. Call the osascript tool with (replace `<MERGED_JSON>` with the actual formatted JSON from Step 3b-v):
+```applescript
+do shell script "cat > ~/Library/Application\\ Support/Claude/claude_desktop_config.json << 'BCCEOF'\n<MERGED_JSON>\nBCCEOF"
+```
+
+**IMPORTANT**: The JSON must be properly formatted with newlines. Use the heredoc syntax exactly as shown. Do not use `echo` or single-line writes for multi-line JSON.
+
+Verify the write succeeded by calling the osascript tool with:
+```applescript
+do shell script "cat ~/Library/Application\\ Support/Claude/claude_desktop_config.json | python3 -c 'import sys,json; d=json.load(sys.stdin); print(len([k for k in d.get(\"mcpServers\",{}) if k.startswith(\"bettercallclaude\")]))'"
+```
+
+The result should be `5`. If it is not, something went wrong — skip to Step 3c.
+
+**Step 3b-vii: Tell the user**
+
+If all sub-steps succeeded, tell the user:
+
+```
+MCP servers installed successfully via host Mac access.
+
+5 BetterCallClaude servers have been added to Claude Desktop's config file.
+A backup of your previous config was created.
+
+Please restart Claude Desktop, then re-run /bettercallclaude:setup to verify all 5 servers are connected.
+```
+
+**STOP HERE** — do not proceed to any further installation steps.
+
+#### Step 3c: Direct install fallback (CLI or no osascript — EXECUTE NOW)
+
+This fallback is used when:
+- Running in Claude Code CLI (not Cowork Desktop)
+- Running in Cowork but `mcp__Control_your_Mac__osascript` is not available
+- Step 3b failed at any sub-step
+
+**Step 3c-i: Locate the MCP server directory**
+
+Run these Bash commands NOW to find the `mcp-servers` directory:
 
 ```bash
 # Try plugin cache first, then current dir, then common locations
@@ -73,31 +210,10 @@ for candidate in \
     break
   fi
 done
-
-# Detect Cowork VM (paths contain /sessions/ or .local-plugins)
-IS_COWORK=false
-if echo "$SERVER_DIR" | grep -qE '(/sessions/|\.local-plugins)'; then
-  IS_COWORK=true
-fi
-
-# If Cowork: copy servers to ~/.claude/ (shared between VM and host)
-if [ "$IS_COWORK" = "true" ] && [ -n "$SERVER_DIR" ]; then
-  HOST_DIR="$HOME/.claude/bettercallclaude-servers"
-  mkdir -p "$HOST_DIR"
-  for s in entscheidsuche bge-search legal-citations fedlex-sparql onlinekommentar; do
-    mkdir -p "$HOST_DIR/$s/dist"
-    for f in "$SERVER_DIR/$s/dist/"*; do
-      [ -f "$f" ] && cp "$f" "$HOST_DIR/$s/dist/"
-    done
-  done
-  SERVER_DIR="$HOST_DIR"
-fi
-
 echo "SERVER_DIR=$SERVER_DIR"
-echo "IS_COWORK=$IS_COWORK"
 ```
 
-If `SERVER_DIR` is empty, tell the user the plugin may not be fully installed and skip to Step 3e (fallback). Otherwise, verify all 5 servers exist:
+If `SERVER_DIR` is empty, tell the user the plugin may not be fully installed and skip to Step 3d (fallback). Otherwise, verify all 5 servers exist:
 
 ```bash
 for s in entscheidsuche bge-search legal-citations fedlex-sparql onlinekommentar; do
@@ -105,11 +221,9 @@ for s in entscheidsuche bge-search legal-citations fedlex-sparql onlinekommentar
 done
 ```
 
-If any are missing, skip to Step 3e. Otherwise proceed to Step 3b.
+If any are missing, skip to Step 3d.
 
-#### Step 3b: Try direct config installation (EXECUTE NOW)
-
-Before generating an installer script, try to install servers directly into Claude Desktop's config file. This eliminates the need for the user to run any Terminal commands.
+**Step 3c-ii: Try direct config modification**
 
 ```bash
 # Determine config path
@@ -160,115 +274,13 @@ MCP servers have been installed directly into Claude Desktop's config file.
 Please restart Claude Desktop, then re-run /bettercallclaude:setup to verify all 5 servers are connected.
 ```
 
-**STOP HERE** — do not generate the `.command` file or show any other instructions.
+**STOP HERE** — do not proceed to any further installation steps.
 
-**If the output contains `DIRECT_INSTALL_FAIL`**: The config file is not accessible from this environment. Proceed silently to Step 3c to generate the installer script as a fallback.
+**If the output contains `DIRECT_INSTALL_FAIL`**: The config file is not accessible from this environment. Proceed to Step 3d.
 
-#### Step 3c: Generate the installer script (EXECUTE NOW)
+#### Step 3d: Fallback (ONLY if Steps 3b and 3c failed)
 
-You MUST run this Bash command to write the `.command` file. Replace `<ACTUAL_SERVER_DIR>` with the absolute path found in Step 3a.
-
-```bash
-cat > ~/.claude/install-bcc-servers.command << 'ENDOFSCRIPT'
-#!/bin/bash
-# BetterCallClaude — Desktop MCP Server Installer
-# Run this on your Mac: open ~/.claude/install-bcc-servers.command
-
-SERVER_DIR="__SERVER_DIR__"
-
-if [ "$(uname)" = "Darwin" ]; then
-  CONFIG_PATH="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
-else
-  CONFIG_PATH="$HOME/.config/Claude/claude_desktop_config.json"
-fi
-
-echo "=============================================="
-echo "  BetterCallClaude — MCP Server Installer"
-echo "=============================================="
-echo ""
-echo "Server directory: $SERVER_DIR"
-echo "Config file:      $CONFIG_PATH"
-echo ""
-
-MISSING=0
-for s in entscheidsuche bge-search legal-citations fedlex-sparql onlinekommentar; do
-  if [ ! -f "$SERVER_DIR/$s/dist/index.js" ]; then
-    echo "  MISSING: $s"; MISSING=1
-  else
-    echo "  Found:   $s"
-  fi
-done
-
-if [ "$MISSING" = "1" ]; then
-  echo ""; echo "ERROR: Some servers are missing. Re-install the plugin first."
-  read -p "Press Enter to close..."; exit 1
-fi
-
-echo ""; echo "Installing servers into Claude Desktop config..."
-
-node -e "
-const fs = require('fs');
-const path = require('path');
-const configPath = process.argv[1];
-const serverDir = process.argv[2];
-let config = {};
-try { config = JSON.parse(fs.readFileSync(configPath, 'utf8')); } catch(e) {}
-if (!config.mcpServers) config.mcpServers = {};
-['entscheidsuche','bge-search','legal-citations','fedlex-sparql','onlinekommentar'].forEach(s => {
-  config.mcpServers['bettercallclaude-' + s] = {
-    command: 'node',
-    args: [path.join(serverDir, s, 'dist', 'index.js')]
-  };
-});
-fs.mkdirSync(path.dirname(configPath), { recursive: true });
-fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + '\n');
-console.log('Done! ' + Object.keys(config.mcpServers).filter(k => k.startsWith('bettercallclaude')).length + ' BetterCallClaude servers installed.');
-" "$CONFIG_PATH" "$SERVER_DIR"
-
-echo ""; echo "Restart Claude Desktop to activate the servers."
-echo "Then run /bettercallclaude:setup to verify."; echo ""
-read -p "Press Enter to close..."
-ENDOFSCRIPT
-```
-
-Then replace the placeholder and make it executable. **Important**: If running in Cowork, use `$HOME/.claude/bettercallclaude-servers` as a literal string (single-quoted) so it expands on the host Mac, not inside the VM:
-
-```bash
-if [ "$IS_COWORK" = "true" ]; then
-  # Single-quoted: $HOME stays literal, expands when user runs installer on host
-  sed -i '' 's|__SERVER_DIR__|$HOME/.claude/bettercallclaude-servers|' ~/.claude/install-bcc-servers.command
-else
-  # Double-quoted: expand SERVER_DIR now (host path is already correct)
-  sed -i '' "s|__SERVER_DIR__|<ACTUAL_SERVER_DIR>|" ~/.claude/install-bcc-servers.command
-fi
-chmod +x ~/.claude/install-bcc-servers.command
-```
-
-Verify the file was written correctly:
-
-```bash
-head -5 ~/.claude/install-bcc-servers.command
-```
-
-#### Step 3d: Show the user ONE simple instruction
-
-After successfully generating the file, tell the user ONLY this:
-
-```
-I've created a one-click installer for your MCP servers.
-
-Open Terminal on your Mac and paste this single command:
-
-  open ~/.claude/install-bcc-servers.command
-
-After it finishes, restart Claude Desktop and re-run /bettercallclaude:setup to verify.
-```
-
-DO NOT show any other installation options at this point. Stop here. Only proceed to Step 3e if the user reports a problem.
-
-#### Step 3e: Fallback (ONLY if Steps 3a-3d failed)
-
-Only show these alternatives if Steps 3a-3d could not install the servers, or if the user explicitly reports that neither the direct install nor the `.command` approach worked:
+Only show these alternatives if both Step 3b (osascript) and Step 3c (direct install) failed, or if the user explicitly reports that the automated install did not work:
 
 **Option A — MCPB bundles**: Download and double-click `.mcpb` files from the latest release:
 
