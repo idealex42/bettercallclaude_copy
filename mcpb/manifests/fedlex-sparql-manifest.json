@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "bettercallclaude-fedlex-sparql",
   "display_name": "BetterCallClaude: Swiss Federal Legislation (Fedlex)",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Look up Swiss federal legislation via the Fedlex SPARQL endpoint. Retrieve statutes, articles, and legislative metadata. Part of the BetterCallClaude Swiss Legal Intelligence suite.",
   "author": {
     "name": "Federico Cesconi",
@@ -47,7 +47,7 @@
   "homepage": "https://bettercallclaude.ch",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fedec65/BetterCallClaude_Marketplace"
+    "url": "https://github.com/fedec65/BetterCallClaude"
   },
   "license": "AGPL-3.0",
   "keywords": ["swiss-law", "fedlex", "legislation", "SPARQL", "statutes", "federal-law"]

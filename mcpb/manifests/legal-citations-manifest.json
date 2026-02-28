@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "bettercallclaude-legal-citations",
   "display_name": "BetterCallClaude: Swiss Legal Citations",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Validate, format, convert, and extract Swiss legal citations across DE/FR/IT/EN. Part of the BetterCallClaude Swiss Legal Intelligence suite.",
   "author": {
     "name": "Federico Cesconi",
@@ -59,7 +59,7 @@
   "homepage": "https://bettercallclaude.ch",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fedec65/BetterCallClaude_Marketplace"
+    "url": "https://github.com/fedec65/BetterCallClaude"
   },
   "license": "AGPL-3.0",
   "keywords": ["swiss-law", "legal-citations", "BGE", "ATF", "DTF", "citation-validation"]
