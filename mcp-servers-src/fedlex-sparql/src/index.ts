@@ -544,6 +544,10 @@ async function main() {
           name: "lookup_statute",
           description:
             "Look up a Swiss federal legal act by SR number (e.g., '220' for OR) or abbreviation (e.g., 'OR', 'ZGB'). Returns basic information including title, type, and status in multiple languages (DE/FR/IT).",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -565,6 +569,10 @@ async function main() {
           name: "get_article",
           description:
             "Retrieve a specific article within a Swiss legal act. Returns article text, marginal notes, paragraphs (Absätze), and letters (Buchstaben) in structured format.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -593,6 +601,10 @@ async function main() {
           name: "search_legislation",
           description:
             "Search across Swiss federal legislation with full-text search and filters. Supports filtering by legal domain, date range, act type, and language.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -650,6 +662,10 @@ async function main() {
           name: "find_related",
           description:
             "Find legislation related to a specific act through amendments, citations, references, or shared legal domain. Optionally includes legislative history (consolidation chain).",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -697,6 +713,10 @@ async function main() {
           name: "get_metadata",
           description:
             "Get comprehensive metadata about a legal act including publication info, subjects/keywords, version history, legal status, available languages, and optionally the document structure (table of contents).",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {

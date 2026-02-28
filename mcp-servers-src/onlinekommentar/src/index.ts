@@ -57,6 +57,10 @@ Example queries:
 - "Art. 97 OR" - Find commentaries on contractual liability
 - "Vertragshaftung" - Search for contract liability commentaries
 - "responsabilité contractuelle" - French search`,
+        annotations: {
+          readOnlyHint: true,
+          destructiveHint: false,
+        },
         inputSchema: {
           type: 'object',
           properties: {
@@ -98,6 +102,10 @@ Returns:
 - Direct URL to source
 
 Use after search_commentaries to get full content.`,
+        annotations: {
+          readOnlyHint: true,
+          destructiveHint: false,
+        },
         inputSchema: {
           type: 'object',
           properties: {
@@ -124,6 +132,10 @@ Resolves abbreviations across languages:
 - StGB/CP → Strafgesetzbuch / Code pénal
 
 Example: "Art. 97 OR" → Finds all commentaries on OR Article 97`,
+        annotations: {
+          readOnlyHint: true,
+          destructiveHint: false,
+        },
         inputSchema: {
           type: 'object',
           properties: {
@@ -152,6 +164,10 @@ Returns:
 - IT: CO, CC, CP, CPC, CPP...
 
 Use this to get UUIDs for filtering search_commentaries by legislative act.`,
+        annotations: {
+          readOnlyHint: true,
+          destructiveHint: false,
+        },
         inputSchema: {
           type: 'object',
           properties: {

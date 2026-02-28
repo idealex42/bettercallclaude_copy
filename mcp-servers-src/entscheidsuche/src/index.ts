@@ -1086,6 +1086,10 @@ async function main() {
           name: "search_decisions",
           description:
             "Unified search across Swiss federal (Bundesgericht) and cantonal court decisions. Uses real APIs with database caching. Supports multi-canton parallel search.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -1144,6 +1148,10 @@ async function main() {
           name: "search_canton",
           description:
             "Search specific canton(s) with parallel aggregation. Optimized for cantonal-only searches across multiple cantons.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -1194,6 +1202,10 @@ async function main() {
           name: "get_related_decisions",
           description:
             "Find related court decisions via citation graph analysis. Uses database citation relationships.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -1216,6 +1228,10 @@ async function main() {
           name: "get_decision_details",
           description:
             "Retrieve full details of a specific court decision by ID. Uses cache-first strategy with 24-hour TTL.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -1231,6 +1247,10 @@ async function main() {
           name: "analyze_precedent_success_rate",
           description:
             "Analyze historical success rates for specific claim types in a legal area. Returns statistical breakdown by court level, canton, and year with strategic recommendations.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -1275,6 +1295,10 @@ async function main() {
           name: "find_similar_cases",
           description:
             "Find analogous court decisions based on a fact pattern or existing decision. Uses semantic similarity scoring to identify relevant precedents.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -1306,6 +1330,10 @@ async function main() {
           name: "get_legal_provision_interpretation",
           description:
             "Retrieve BGE interpretations of a specific statutory provision. Finds court decisions that interpret and apply the given article.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {

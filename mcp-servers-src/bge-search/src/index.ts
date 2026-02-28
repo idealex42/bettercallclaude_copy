@@ -424,6 +424,10 @@ async function main() {
           name: "search_bge",
           description:
             "Search Swiss Federal Supreme Court (BGE) decisions by query, date range, chamber, and legal area. Uses cache-first strategy with API and local database fallback.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -477,6 +481,10 @@ async function main() {
           name: "get_bge_decision",
           description:
             "Retrieve a specific BGE decision by citation. Uses cache-first strategy with API and local database fallback.",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {
@@ -492,6 +500,10 @@ async function main() {
         {
           name: "validate_citation",
           description: "Validate BGE citation format and normalize it",
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: "object",
             properties: {

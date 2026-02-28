@@ -207,6 +207,10 @@ class LegalCitationsMCPServer {
         {
           name: 'validate_citation',
           description: 'Validate a Swiss legal citation (BGE/ATF/DTF or statutory). Returns validation result with normalized citation and error messages if invalid.',
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: 'object',
             properties: {
@@ -221,6 +225,10 @@ class LegalCitationsMCPServer {
         {
           name: 'format_citation',
           description: 'Format a Swiss legal citation to a specific language (DE/FR/IT/EN). Converts citation components while preserving legal meaning.',
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: 'object',
             properties: {
@@ -245,6 +253,10 @@ class LegalCitationsMCPServer {
         {
           name: 'convert_citation',
           description: 'Convert a citation from one language to another. Auto-detects source language and converts to target language.',
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: 'object',
             properties: {
@@ -269,6 +281,10 @@ class LegalCitationsMCPServer {
         {
           name: 'parse_citation',
           description: 'Parse a Swiss legal citation and extract all components. Returns citation type, language, components, and validity status.',
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: 'object',
             properties: {
@@ -283,6 +299,10 @@ class LegalCitationsMCPServer {
         {
           name: 'get_provision_text',
           description: 'Retrieve the official text of a Swiss statutory provision from Fedlex. Returns the provision text in the requested language with metadata.',
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: 'object',
             properties: {
@@ -318,6 +338,10 @@ class LegalCitationsMCPServer {
         {
           name: 'extract_citations',
           description: 'Extract all legal citations from a document or text. Identifies BGE/ATF/DTF case citations and statutory references.',
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: 'object',
             properties: {
@@ -344,6 +368,10 @@ class LegalCitationsMCPServer {
         {
           name: 'standardize_document_citations',
           description: 'Standardize all legal citations in a document to a consistent format and language. Returns the document with normalized citations.',
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: 'object',
             properties: {
@@ -372,6 +400,10 @@ class LegalCitationsMCPServer {
         {
           name: 'compare_citation_versions',
           description: 'Compare different versions of a statutory provision over time. Shows changes between versions with effective dates.',
+          annotations: {
+            readOnlyHint: true,
+            destructiveHint: false,
+          },
           inputSchema: {
             type: 'object',
             properties: {
