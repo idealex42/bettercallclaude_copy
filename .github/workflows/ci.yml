@@ -92,18 +92,18 @@ jobs:
 
       - name: Check compiled bundles exist
         run: |
-          for server in entscheidsuche bge-search legal-citations fedlex-sparql onlinekommentar; do
-            if [ ! -f "mcp-servers/$server/dist/index.js" ]; then
-              echo "FAIL: Missing mcp-servers/$server/dist/index.js"
+          for server in entscheidsuche bge-search legal-citations fedlex-sparql onlinekommentar ollama; do
+            if [ ! -f "bettercallclaude/mcp-servers/$server/dist/index.js" ]; then
+              echo "FAIL: Missing bettercallclaude/mcp-servers/$server/dist/index.js"
               exit 1
             fi
-            echo "OK: mcp-servers/$server/dist/index.js"
+            echo "OK: bettercallclaude/mcp-servers/$server/dist/index.js"
           done
 
       - name: Check .mcp.json
         run: |
           node -e "
-            const m = JSON.parse(require('fs').readFileSync('.mcp.json','utf8'));
+            const m = JSON.parse(require('fs').readFileSync('bettercallclaude/.mcp.json','utf8'));
             if (!m.mcpServers) { console.error('Missing mcpServers'); process.exit(1); }
             const servers = Object.keys(m.mcpServers);
             console.log('MCP servers configured:', servers.length);
@@ -112,7 +112,7 @@ jobs:
 
       - name: Check skill frontmatter
         run: |
-          for skill_dir in skills/*/; do
+          for skill_dir in bettercallclaude/skills/*/; do
             skill_file="${skill_dir}SKILL.md"
             if [ ! -f "$skill_file" ]; then
               echo "FAIL: Missing $skill_file"
@@ -127,7 +127,7 @@ jobs:
 
       - name: Check command frontmatter
         run: |
-          for cmd in commands/*.md; do
+          for cmd in bettercallclaude/commands/*.md; do
             if ! head -1 "$cmd" | grep -q "^---"; then
               echo "FAIL: $cmd missing YAML frontmatter"
               exit 1
@@ -137,7 +137,7 @@ jobs:
 
       - name: Check agent frontmatter
         run: |
-          for agent in agents/*.md; do
+          for agent in bettercallclaude/agents/*.md; do
             if ! head -1 "$agent" | grep -q "^---"; then
               echo "FAIL: $agent missing YAML frontmatter"
               exit 1
