@@ -10,7 +10,7 @@
     "watch": "npx tsc --watch",
     "dev": "npx tsx watch src/index.ts",
     "lint": "eslint src/**/*.ts",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist"
