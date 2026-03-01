@@ -9,7 +9,7 @@
     "build": "npx tsc",
     "watch": "npx tsc --watch",
     "dev": "npx tsx watch src/index.ts",
-    "lint": "eslint src/**/*.ts",
+    "lint": "eslint src/",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
