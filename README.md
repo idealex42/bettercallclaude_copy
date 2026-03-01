@@ -14,6 +14,8 @@ The plugin covers the full spectrum of Swiss legal work: BGE/ATF/DTF precedent r
 
 ## Installation
 
+For the full installation guide — including Cowork MCP server configuration, troubleshooting, and upgrading — see [docs/INSTALL.md](docs/INSTALL.md).
+
 ### Quick Install (Recommended)
 
 ```
