@@ -19,6 +19,10 @@
     "bettercallclaude-onlinekommentar": {
       "command": "node",
       "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-servers/onlinekommentar/dist/index.js"]
+    },
+    "bettercallclaude-ollama": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-servers/ollama/dist/index.js"]
     }
   }
 }

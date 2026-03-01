@@ -19,7 +19,7 @@ OUT_DIR="$REPO_ROOT/mcp-servers"
 SHARED_SERVERS=("entscheidsuche" "bge-search" "fedlex-sparql")
 
 # Standalone servers (ESM)
-STANDALONE_SERVERS=("legal-citations" "onlinekommentar")
+STANDALONE_SERVERS=("legal-citations" "onlinekommentar" "ollama")
 
 echo "=== BetterCallClaude MCP Server Builder ==="
 echo ""

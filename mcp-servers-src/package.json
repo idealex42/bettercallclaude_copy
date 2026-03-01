@@ -9,7 +9,8 @@
     "entscheidsuche",
     "legal-citations",
     "fedlex-sparql",
-    "onlinekommentar"
+    "onlinekommentar",
+    "ollama"
   ],
   "scripts": {
     "build": "npm run build --workspaces",
