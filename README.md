@@ -14,18 +14,34 @@ The plugin covers the full spectrum of Swiss legal work: BGE/ATF/DTF precedent r
 
 ## Installation
 
-BetterCallClaude can be installed through several channels.
-
-### Claude Cowork (Recommended)
-
-Visit the installation page at **[bettercallclaude.ai/desktop](https://bettercallclaude.ai/desktop)** for guided setup instructions. The page walks you through installing the plugin directly in Claude Cowork with a few clicks.
-
-### From GitHub (Claude Code CLI)
-
-Install the plugin directly from GitHub:
+### Quick Install (Recommended)
 
 ```
-claude plugin add fedec65/bettercallclaude
+claude plugin marketplace add fedec65/bettercallclaude
+claude plugin install bettercallclaude@bettercallclaude-marketplace
+```
+
+Works in Claude Code CLI and in Cowork's built-in terminal (click **Terminal** in Cowork's bottom bar).
+
+### Cowork Desktop GUI
+
+The Cowork "Add marketplace from GitHub" dialog has a known networking issue that prevents it from reaching GitHub in the sandboxed VM ([#26951](https://github.com/anthropics/claude-code/issues/26951), [#28125](https://github.com/anthropics/claude-code/issues/28125), [#28853](https://github.com/anthropics/claude-code/issues/28853)). If you see a connection error, use the terminal method above instead: open Cowork's built-in terminal and run the `claude plugin marketplace add` command.
+
+### Team/Project Setup
+
+Add the marketplace to your project's `.claude/settings.json` so that anyone who clones the repo gets prompted to install the plugin automatically:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "bettercallclaude-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "fedec65/bettercallclaude"
+      }
+    }
+  }
+}
 ```
 
 ### Windows Installation (Claude Code CLI)
@@ -53,7 +69,8 @@ winget install Anthropic.ClaudeCode
 After installation, install the plugin:
 
 ```
-claude plugin add fedec65/bettercallclaude
+claude plugin marketplace add fedec65/bettercallclaude
+claude plugin install bettercallclaude@bettercallclaude-marketplace
 ```
 
 You can launch `claude` from PowerShell, CMD, or Git Bash. You do not need to run PowerShell as Administrator.
@@ -65,7 +82,7 @@ You can launch `claude` from PowerShell, CMD, or Git Bash. You do not need to ru
 > { "env": { "CLAUDE_CODE_GIT_BASH_PATH": "C:\\Program Files\\Git\\bin\\bash.exe" } }
 > ```
 
-### Manual Installation (Claude Code CLI)
+### Manual Installation
 
 Clone the repository and point Claude Code to the repo root:
 
