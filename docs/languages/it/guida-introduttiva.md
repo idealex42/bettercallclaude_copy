@@ -256,7 +256,7 @@ claude
 ./install.sh doctor
 
 # Reinstallare i moduli Node
-cd mcp-servers/legal-citations
+cd mcp-servers-src/legal-citations
 rm -rf node_modules
 npm install
 npm run build

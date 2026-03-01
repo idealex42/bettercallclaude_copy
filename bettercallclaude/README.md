@@ -6,7 +6,7 @@ BetterCallClaude is a plugin for legal professionals working in Cowork or Claude
 
 The plugin covers the full spectrum of Swiss legal work: BGE/ATF/DTF precedent research, case strategy development with risk assessment, adversarial legal analysis, compliance and data protection advisory, fiscal and corporate law expertise, real estate law, legal drafting with jurisdiction-aware templates, legal translation, and citation verification across all 26 Swiss cantons. Privacy compliance with Anwaltsgeheimnis (Art. 321 StGB) is enforced automatically through a pre-tool-use hook that detects privileged content before it leaves the local environment.
 
-**Version**: 3.1.0 -- 18 agents, 17 commands, 10 skills, 5 MCP servers.
+**Version**: 3.1.0 -- 19 agents, 18 commands, 10 skills, 6 MCP servers.
 
 > Love BetterCallClaude? Support the project — [**Buy me a coffee**](https://buymeacoffee.com/federicocesconi) ☕
 
@@ -67,12 +67,12 @@ You can launch `claude` from PowerShell, CMD, or Git Bash. You do not need to ru
 
 ### Manual Installation (Claude Code CLI)
 
-Clone the repository and point Claude Code to the repo root:
+Clone the repository and point Claude Code to the plugin directory:
 
 ```bash
 git clone https://github.com/fedec65/bettercallclaude.git
 cd bettercallclaude
-claude --plugin-dir .
+claude --plugin-dir bettercallclaude/
 ```
 
 ---
@@ -97,6 +97,7 @@ claude --plugin-dir .
 | `/bettercallclaude:doc-analyze` | Analyze Swiss legal documents -- identify legal issues, extract key clauses, verify citations, assess compliance. |
 | `/bettercallclaude:help` | Show complete command reference, available agents, skills, and usage examples. |
 | `/bettercallclaude:version` | Display plugin version, installed components, and system status. |
+| `/bettercallclaude:summarize` | Consolidate multi-agent pipeline output -- deduplicate disclaimers, terminology, and citations with length control (`--short`/`--medium`/`--long`). |
 | `/bettercallclaude:setup` | Check MCP server status and auto-install servers to Claude Desktop if needed. |
 
 ### Usage examples

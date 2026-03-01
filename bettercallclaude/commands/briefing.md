@@ -24,6 +24,9 @@ Parse flags from the user's input to determine the mode:
 | `--depth standard` | Default adaptive depth based on complexity score |
 | `--depth deep` | Force full briefing with maximum panel size and question rounds |
 | `--agents researcher,strategist,...` | Override automatic panel selection with specific agents |
+| `--short` | Set execution plan output length to short (1-2 pages) |
+| `--medium` | Set execution plan output length to medium (default, 3-5 pages) |
+| `--long` | Set execution plan output length to long (full detail) |
 
 ## Execution
 
@@ -88,6 +91,7 @@ After plan approval, present the execution options:
 - All persisted state must be anonymized (no client names or identifying details in memory keys).
 - Resume must restore full context without re-asking questions the user already answered.
 - Depth overrides must be respected even when complexity scoring suggests otherwise.
+- Length flags (`--short/--medium/--long`) are passed to the summarizer stage appended to the execution plan.
 
 ## User Query
 

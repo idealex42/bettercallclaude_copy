@@ -18,7 +18,7 @@ BetterCallClaude provides Swiss legal intelligence through three interfaces:
 
 ---
 
-## Commands (17)
+## Commands (18)
 
 ### Core Commands
 
@@ -60,11 +60,12 @@ BetterCallClaude provides Swiss legal intelligence through three interfaces:
 | `/bettercallclaude:cite` | Format and verify individual Swiss legal citations |
 | `/bettercallclaude:setup` | Check MCP server status and configure for Cowork Desktop |
 | `/bettercallclaude:version` | Display plugin version, components, and system status |
+| `/bettercallclaude:summarize` | Consolidate multi-agent pipeline output with length control (--short/--medium/--long) |
 | `/bettercallclaude:help` | This command reference |
 
 ---
 
-## Agents (18)
+## Agents (19)
 
 ### Core Pipeline Agents
 
@@ -93,6 +94,7 @@ BetterCallClaude provides Swiss legal intelligence through three interfaces:
 | judicial | Synthesizes advocate and adversary into balanced assessment |
 | briefing | Pre-execution intake, specialist panel consultation, execution plan building |
 | orchestrator | Multi-agent pipeline coordination and workflow management |
+| summarizer | Pipeline output consolidation, deduplication, length-calibrated summaries |
 
 ---
 
@@ -115,7 +117,7 @@ Skills activate automatically when Claude detects relevant context.
 
 ---
 
-## MCP Servers (5)
+## MCP Servers (6)
 
 | Server | Purpose |
 |--------|---------|
@@ -124,6 +126,7 @@ Skills activate automatically when Claude detects relevant context.
 | legal-citations | Citation verification and multi-lingual formatting |
 | fedlex-sparql | Swiss federal legislation database queries |
 | onlinekommentar | Swiss legal commentary access |
+| ollama | Local LLM processing for privacy-sensitive content |
 
 ---
 

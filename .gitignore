@@ -10,11 +10,11 @@ mcp-servers-src/*/node_modules/
 mcp-servers-src/*/coverage/
 mcp-servers-src/*/.env
 
-# NOTE: mcp-servers/*/dist/ is NOT ignored — compiled bundles are checked into git
-# so end users don't need a build step
+# NOTE: bettercallclaude/mcp-servers/*/dist/ is NOT ignored — compiled bundles
+# are checked into git so end users don't need a build step
 
 # Runtime data (SQLite databases created at runtime)
-mcp-servers/*/data/
+bettercallclaude/mcp-servers/*/data/
 
 # Package outputs
 dist/mcpb/

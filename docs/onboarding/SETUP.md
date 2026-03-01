@@ -66,7 +66,7 @@ npm install
 # Build
 npm run build
 
-# The compiled output goes to mcp-servers/<server-name>/dist/
+# The compiled output goes to bettercallclaude/mcp-servers/<server-name>/dist/
 ```
 
 ### Common Tasks

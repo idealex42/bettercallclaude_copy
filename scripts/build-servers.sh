@@ -2,8 +2,8 @@
 # build-servers.sh - Build MCP servers from TypeScript source into single-file bundles
 #
 # Compiles each MCP server using esbuild to produce standalone single-file
-# bundles in mcp-servers/*/dist/index.js, matching the format expected by
-# the plugin's .mcp.json configuration.
+# bundles in bettercallclaude/mcp-servers/*/dist/index.js, matching the
+# format expected by the plugin's .mcp.json configuration.
 #
 # Prerequisites: Node.js >= 18
 # Usage: npm run build:bundle
@@ -13,7 +13,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 SRC_DIR="$REPO_ROOT/mcp-servers-src"
-OUT_DIR="$REPO_ROOT/mcp-servers"
+OUT_DIR="$REPO_ROOT/bettercallclaude/mcp-servers"
 
 # Servers that depend on @bettercallclaude/shared (CommonJS)
 SHARED_SERVERS=("entscheidsuche" "bge-search" "fedlex-sparql")

@@ -211,6 +211,8 @@ Complexity: [N]/10 | Jurisdiction: [Federal/Canton] | Language: [DE/FR/IT/EN]
 **Flags**: [warnings, deadlines, missing information]
 ```
 
+**Summarizer integration**: If the execution plan has 3+ stages, automatically append a final summarizer stage with `--medium` as default length. The user can override with `--short` or `--long` during plan refinement.
+
 ### Step 7: PRESENT & REFINE
 
 Present the execution plan to the user and offer refinement:
@@ -225,8 +227,9 @@ Present the execution plan to the user and offer refinement:
 2. **Modify** — Adjust agents, order, or tasks (tell me what to change)
 3. **Add agent** — Include an additional specialist
 4. **Remove agent** — Drop a stage you don't need
-5. **Save for later** — Persist this plan and return to it anytime
-6. **Export** — Output the plan as YAML for external use
+5. **Summary length** — Set output length: `--short`, `--medium` (default), or `--long`
+6. **Save for later** — Persist this plan and return to it anytime
+7. **Export** — Output the plan as YAML for external use
 ```
 
 Handle user refinement requests:
