@@ -39,4 +39,4 @@ Each guide covers:
 
 ---
 
-*BetterCallClaude v1.3.2 - Legal Intelligence Framework for Swiss Lawyers*
+*BetterCallClaude v3.1.0 - Legal Intelligence Framework for Swiss Lawyers*

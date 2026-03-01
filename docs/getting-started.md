@@ -1,8 +1,20 @@
 # Getting Started with BetterCallClaude
 
-**Welcome to BetterCallClaude v2.2.1** - Your AI-powered legal intelligence framework for Swiss law.
+**Welcome to BetterCallClaude v3.1.0** - Your AI-powered legal intelligence framework for Swiss law.
 
 This guide will help you set up and start using BetterCallClaude for legal research, case strategy, and document drafting.
+
+---
+
+## What's New in v3.1.0
+
+- **18 specialized legal agents** (up from 14) covering compliance, corporate, data protection, fiscal, real estate, and more
+- **Adversarial analysis mode** (`/legal-adversarial`) for stress-testing legal arguments
+- **Briefing sessions** (`/legal-briefing`) for structured legal briefing workflows
+- **Workflow templates** (`/legal-workflow`) for multi-step legal process automation
+- **fedlex-sparql MCP server** for SPARQL queries against Swiss federal law (Fedlex)
+- **onlinekommentar MCP server** for legal commentary search
+- **All 17 slash commands** now use hyphen syntax (`/legal-research`, `/legal-strategy`, etc.)
 
 ---
 
@@ -40,7 +52,10 @@ BetterCallClaude is a specialized legal intelligence framework built on Claude C
 ✅ **All 26 cantons**: Complete coverage of Swiss cantonal law systems
 ✅ **Multi-lingual**: Native support for DE, FR, IT, EN with proper legal terminology
 ✅ **Citation accuracy >95%**: Automated verification against official sources
-✅ **14 specialized agents**: Domain experts for compliance, tax, real estate, and more
+✅ **18 specialized agents**: Domain experts for compliance, tax, real estate, corporate, data protection, and more
+✅ **17 slash commands**: Full command suite with `/legal-` prefix for professional workflows
+✅ **10 skills**: Specialized legal skills for research, drafting, strategy, and compliance
+✅ **5 MCP servers**: bge-search, entscheidsuche, fedlex-sparql, legal-citations, onlinekommentar
 ✅ **Ollama integration**: Local LLM inference for privacy-sensitive work
 
 ---
@@ -251,18 +266,24 @@ The easiest way to use BetterCallClaude is the `/legal` intelligent proxy. It un
 
 | Route | Agent | Purpose |
 |-------|-------|---------|
-| `@researcher` | ResearcherAgent | Swiss legal research |
-| `@strategist` | StrategistAgent | Litigation strategy |
-| `@drafter` | DrafterAgent | Document drafting |
-| `@compliance` | Compliance Officer | FINMA, AML/KYC |
-| `@data-protection` | Data Protection | GDPR, nDSG/FADP |
-| `@risk` | Risk Analyst | Probability, damages |
-| `@procedure` | Procedure Specialist | Deadlines, ZPO/StPO |
-| `@translator` | Legal Translator | DE/FR/IT terminology |
-| `@fiscal` | Fiscal Expert | Tax law, DTAs |
-| `@corporate` | Corporate & Commercial | M&A, contracts |
+| `@adversary` | Adversary Agent | Adversarial analysis, argument stress-testing |
+| `@advocate` | Advocate Agent | Client advocacy and representation |
+| `@briefing` | Briefing Agent | Structured legal briefing sessions |
 | `@cantonal` | Cantonal Law Expert | All 26 cantons |
+| `@citation` | Citation Agent | Citation verification and formatting |
+| `@compliance` | Compliance Officer | FINMA, AML/KYC |
+| `@corporate` | Corporate & Commercial | M&A, contracts |
+| `@data-protection` | Data Protection | GDPR, nDSG/FADP |
+| `@drafter` | Drafter Agent | Document drafting |
+| `@fiscal` | Fiscal Expert | Tax law, DTAs |
+| `@judicial` | Judicial Agent | Court procedures, judicial reasoning |
+| `@orchestrator` | Orchestrator Agent | Multi-agent workflow coordination |
+| `@procedure` | Procedure Specialist | Deadlines, ZPO/StPO |
 | `@realestate` | Real Estate Expert | Grundbuch, Lex Koller |
+| `@researcher` | Researcher Agent | Swiss legal research |
+| `@risk` | Risk Analyst | Probability, damages |
+| `@strategist` | Strategist Agent | Litigation strategy |
+| `@translator` | Legal Translator | DE/FR/IT terminology |
 
 ---
 
@@ -350,7 +371,7 @@ BetterCallClaude operates in **three Swiss law modes** that provide the correct 
 
 **Automatic Activation**: Canton codes or canton names
 
-**Supported Cantons** (v1.3.2 - All 26 cantons):
+**Supported Cantons** (v3.1.0 - All 26 cantons):
 
 | German-speaking | French-speaking | Italian/Romansh |
 |-----------------|-----------------|-----------------|
@@ -394,9 +415,9 @@ Query in French: "Quels sont les délais de prescription selon l'art. 127 CO?"
 BetterCallClaude supports **two activation methods**:
 
 1. **Natural Language** (Auto-Detection) - Just ask your question naturally
-2. **Explicit Commands** (Professional Assurance) - Use `/legal:` prefix for certainty
+2. **Explicit Commands** (Professional Assurance) - Use `/legal-` prefix for certainty
 
-**When to use explicit `/legal:` commands:**
+**When to use explicit `/legal-` commands:**
 - ✅ Creating client deliverables or billable work
 - ✅ Need audit trail for professional documentation
 - ✅ Want absolute certainty framework is active
@@ -407,45 +428,45 @@ BetterCallClaude supports **two activation methods**:
 
 #### Persona Commands
 
-**`/legal:research`** - Legal Research & Precedent Analysis
+**`/legal-research`** - Legal Research & Precedent Analysis
 ```
-/legal:research Art. 97 OR contractual liability
+/legal-research Art. 97 OR contractual liability
 
 Response includes:
-🎭 Persona: Legal Researcher (/legal:research activated)
+🎭 Persona: Legal Researcher (/legal-research activated)
 📖 Mode: Federal Law
 🇨🇭 Jurisdiction: Swiss Federal Law
 ```
 
-**`/legal:strategy`** - Case Strategy & Litigation Planning
+**`/legal-strategy`** - Case Strategy & Litigation Planning
 ```
-/legal:strategy Breach of contract case, CHF 500,000 damages
+/legal-strategy Breach of contract case, CHF 500,000 damages
 
 Response includes:
-🎭 Persona: Case Strategist (/legal:strategy activated)
+🎭 Persona: Case Strategist (/legal-strategy activated)
 ⚖️ Analysis Type: Strategic Assessment
 ```
 
-**`/legal:draft`** - Document Creation & Drafting
+**`/legal-draft`** - Document Creation & Drafting
 ```
-/legal:draft Service agreement under Swiss OR
+/legal-draft Service agreement under Swiss OR
 
 Response includes:
-🎭 Persona: Legal Drafter (/legal:draft activated)
+🎭 Persona: Legal Drafter (/legal-draft activated)
 📄 Document Type: Contract
 ```
 
 #### Mode Override Commands
 
-**`/legal:federal`** - Force Federal Law Mode
+**`/legal-federal`** - Force Federal Law Mode
 ```
-/legal:federal
+/legal-federal
 Explain Art. 41 OR liability requirements
 ```
 
-**`/legal:cantonal [CANTON]`** - Force Cantonal Law Mode
+**`/legal-cantonal [CANTON]`** - Force Cantonal Law Mode
 ```
-/legal:cantonal ZH
+/legal-cantonal ZH
 Court fees for Zürich Commercial Court
 
 Supported cantons: All 26 Swiss cantons
@@ -453,9 +474,9 @@ Supported cantons: All 26 Swiss cantons
 
 #### Help Command
 
-**`/legal:help`** - Show All Commands
+**`/legal-help`** - Show All Commands
 ```
-/legal:help
+/legal-help
 
 Shows complete command reference with examples
 ```
@@ -466,16 +487,16 @@ You can combine persona and mode commands:
 
 ```bash
 # Federal research
-/legal:federal
-/legal:research BGE on Art. 97 OR
+/legal-federal
+/legal-research BGE on Art. 97 OR
 
 # Zürich strategy
-/legal:cantonal ZH
-/legal:strategy Commercial dispute options
+/legal-cantonal ZH
+/legal-strategy Commercial dispute options
 
 # Geneva drafting (French)
-/legal:cantonal GE
-/legal:draft Complaint for Tribunal de première instance
+/legal-cantonal GE
+/legal-draft Complaint for Tribunal de première instance
 ```
 
 ### Natural Language vs. Explicit Commands
@@ -494,10 +515,10 @@ Response:
 
 **Explicit Command:**
 ```
-Query: /legal:research Art. 97 OR
+Query: /legal-research Art. 97 OR
 
 Response:
-🎭 Persona: Legal Researcher (/legal:research activated)
+🎭 Persona: Legal Researcher (/legal-research activated)
 📖 Mode: Federal Law
 ⚡ Activation: Explicit command override
 [Analysis...]
@@ -715,7 +736,7 @@ Activate the right persona for your task:
 
 **Solutions**:
 1. Explicitly mention canton: "according to ZH law"
-2. All 26 cantons are supported in v1.3.2
+2. All 26 cantons are supported in v3.1.0
 3. Use standard canton abbreviations (ZH, BE, GE, etc.)
 
 ### Issue: Citation Not Found
@@ -754,8 +775,8 @@ Customize BetterCallClaude for your practice:
 ### Community
 
 Join the Swiss legal tech community:
-- [GitHub Discussions](https://github.com/yourusername/bettercallclaude/discussions)
-- [Report Issues](https://github.com/yourusername/bettercallclaude/issues)
+- [GitHub Discussions](https://github.com/fedec65/bettercallclaude/discussions)
+- [Report Issues](https://github.com/fedec65/bettercallclaude/issues)
 - [Contributing Guide](../CONTRIBUTING.md)
 
 ---
@@ -765,8 +786,8 @@ Join the Swiss legal tech community:
 Need help? We're here for you:
 
 - **Documentation**: Browse all guides at [docs/](../docs/)
-- **GitHub Issues**: Report bugs at [github.com/yourusername/bettercallclaude/issues](https://github.com/yourusername/bettercallclaude/issues)
-- **Community Q&A**: Ask questions at [GitHub Discussions](https://github.com/yourusername/bettercallclaude/discussions)
+- **GitHub Issues**: Report bugs at [github.com/fedec65/bettercallclaude/issues](https://github.com/fedec65/bettercallclaude/issues)
+- **Community Q&A**: Ask questions at [GitHub Discussions](https://github.com/fedec65/bettercallclaude/discussions)
 
 ---
 
@@ -788,4 +809,4 @@ Need help? We're here for you:
 
 You're now ready to transform your legal research and case strategy with AI-powered intelligence.
 
-*BetterCallClaude v2.2.1 - Built for Swiss Legal Professionals*
+*BetterCallClaude v3.1.0 - Built for Swiss Legal Professionals*

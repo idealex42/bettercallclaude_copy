@@ -1,6 +1,6 @@
 # Guida Introduttiva - BetterCallClaude
 
-**Intelligenza Giuridica per Avvocati Svizzeri** - Versione 1.3.2
+**Intelligenza Giuridica per Avvocati Svizzeri** - Versione 3.1.0
 
 ---
 
@@ -17,7 +17,7 @@ BetterCallClaude è un framework completo di intelligenza giuridica che offre ag
 
 ---
 
-## Novità v1.3.2
+## Novità v3.1.0
 
 ### Proxy Intelligente (`/legal`)
 - **Linguaggio naturale**: Descrivi la tua esigenza semplicemente con le tue parole
@@ -153,11 +153,11 @@ Il modo più semplice per usare BetterCallClaude è il proxy intelligente `/lega
 
 | Comando | Descrizione |
 |---------|-------------|
-| `/legal:research` | Cerca nelle fonti giuridiche svizzere |
-| `/legal:analyze` | Analizza gli argomenti giuridici |
-| `/legal:compare` | Confronta i precedenti |
-| `/legal:strategy` | Sviluppa una strategia processuale |
-| `/legal:draft` | Redigi documenti giuridici |
+| `/legal-research` | Cerca nelle fonti giuridiche svizzere |
+| `/legal-strategy` | Sviluppa una strategia processuale |
+| `/legal-draft` | Redigi documenti giuridici |
+| `/legal-doc-analyze` | Analizza documenti giuridici |
+| `/legal-precedent` | Ricerca i precedenti |
 
 ### Comandi Agente
 
@@ -171,9 +171,9 @@ Il modo più semplice per usare BetterCallClaude è il proxy intelligente `/lega
 
 | Comando | Descrizione |
 |---------|-------------|
-| `/legal:help` | Mostra l'aiuto dei comandi |
-| `/legal:federal` | Forza la modalità diritto federale |
-| `/legal:cantonal [CANTONE]` | Forza la modalità diritto cantonale |
+| `/legal-help` | Mostra l'aiuto dei comandi |
+| `/legal-federal` | Forza la modalità diritto federale |
+| `/legal-cantonal [CANTONE]` | Forza la modalità diritto cantonale |
 
 ---
 
@@ -214,7 +214,7 @@ claude
 
 ## Cantoni Supportati
 
-BetterCallClaude v1.3.2 supporta tutti i 26 cantoni svizzeri:
+BetterCallClaude v3.1.0 supporta tutti i 26 cantoni svizzeri:
 
 | Germanofoni | Francofoni | Italiano/Romancio |
 |-------------|------------|-------------------|
@@ -263,7 +263,7 @@ npm run build
 ```
 
 ### Cantone sbagliato applicato
-- Tutti i 26 cantoni sono supportati in v1.3.2
+- Tutti i 26 cantoni sono supportati in v3.1.0
 - Usa le abbreviazioni cantonali standard (ZH, BE, GE, etc.)
 - Menzione esplicita: "secondo il diritto di TI"
 
@@ -272,7 +272,7 @@ npm run build
 ## Risorse Aggiuntive
 
 - [Documentazione in inglese](../../getting-started.md)
-- [Riferimento dei Comandi](../../.claude/commands/legal:help.md)
+- [Riferimento dei Comandi](/legal-help)
 - [Repository GitHub](https://github.com/fedec65/bettercallclaude)
 
 ---
@@ -291,4 +291,4 @@ npm run build
 
 ---
 
-*BetterCallClaude v1.3.2 - Intelligenza Giuridica per gli Avvocati Svizzeri*
+*BetterCallClaude v3.1.0 - Intelligenza Giuridica per gli Avvocati Svizzeri*

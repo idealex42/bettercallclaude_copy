@@ -1,13 +1,13 @@
-# /agent:researcher Implementation Specification
+# /agent-researcher Implementation Specification
 
-> **Version**: 1.0.0-draft
+> **Version**: v3.1.0
 > **Priority**: P0 (Critical for MVP)
 > **Estimated Effort**: 3 weeks
-> **Dependencies**: MCP servers (entscheidsuche, bge-search, cantonal-courts, legal-citations)
+> **Dependencies**: MCP servers (bge-search, entscheidsuche, fedlex-sparql, legal-citations, onlinekommentar)
 
 ## Executive Summary
 
-The `/agent:researcher` is the foundational legal research agent that enables the 80% time savings target for BetterCallClaude. It performs deep, multi-source legal research with automatic citation verification and synthesis.
+The `/agent-researcher` is the foundational legal research agent that enables the 80% time savings target for BetterCallClaude. It performs deep, multi-source legal research with automatic citation verification and synthesis.
 
 ---
 
@@ -65,7 +65,7 @@ checkpoint_frequency: 3min
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                  /agent:researcher WORKFLOW                     │
+│                  /agent-researcher WORKFLOW                     │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  INPUT: Research question + Case context                        │
@@ -85,13 +85,13 @@ checkpoint_frequency: 3min
 │       ▼                                                         │
 │  ┌─────────────────┐     ┌─────────────────┐                    │
 │  │ 3. SEARCH       │────▶│ MCP: bge-search │                    │
-│  │    (parallel)   │────▶│ MCP: cantonal   │                    │
+│  │    (parallel)   │────▶│ MCP: entscheid  │                    │
 │  │                 │────▶│ MCP: doctrine   │                    │
 │  └─────────────────┘     └─────────────────┘                    │
 │       │                                                         │
 │       ▼                                                         │
 │  ┌─────────────────┐     ┌─────────────────┐                    │
-│  │ 4. VERIFY       │────▶│ /agent:citation │                    │
+│  │ 4. VERIFY       │────▶│ /agent-citation │                    │
 │  │    (invoke)     │     │   -checker      │                    │
 │  └─────────────────┘     └─────────────────┘                    │
 │       │                                                         │
@@ -179,7 +179,7 @@ interface SearchStrategy {
 }
 
 interface SearchSource {
-  name: string;  // e.g., "bge-search", "cantonal-zh"
+  name: string;  // e.g., "bge-search", "entscheidsuche"
   priority: number;
   expectedVolume: number;
 }
@@ -220,9 +220,9 @@ await mcpCall("bge-search", "search", {
   limit: 50
 });
 
-// Cantonal Search (parallel for each canton)
+// Cantonal Search (parallel for each canton via entscheidsuche)
 await Promise.all(cantons.map(canton =>
-  mcpCall("cantonal-courts", "search", {
+  mcpCall("entscheidsuche", "search", {
     canton,
     query: "...",
     limit: 30
@@ -266,7 +266,7 @@ interface RawResult {
 
 **Process**:
 1. Extract all citations from results
-2. Invoke `/agent:citation-checker` sub-agent
+2. Invoke `/agent-citation-checker` sub-agent
 3. Receive verification report
 4. Flag outdated or incorrect citations
 5. Suggest alternatives for problematic citations
@@ -379,9 +379,10 @@ interface ResearchMemo {
 | Server | Purpose | API Methods |
 |--------|---------|-------------|
 | **bge-search** | Federal Supreme Court | `search`, `getDecision`, `getCitedBy` |
-| **cantonal-courts** | Cantonal courts | `search`, `getDecision`, `listCourts` |
-| **entscheidsuche** | Unified search | `search`, `advancedSearch` |
+| **entscheidsuche** | Unified court search (incl. cantonal) | `search`, `advancedSearch` |
+| **fedlex-sparql** | Federal law SPARQL queries | `query`, `searchLegislation` |
 | **legal-citations** | Citation verification | `verify`, `format`, `findAlternatives` |
+| **onlinekommentar** | Legal commentary search | `search`, `getCommentary` |
 
 ### MCP Call Patterns
 
@@ -390,7 +391,7 @@ interface ResearchMemo {
 async searchAllSources(queries: SearchQuery[]): Promise<SearchResults> {
   const bgePromise = this.mcpCall("bge-search", "search", queries.bge);
   const cantonalPromises = queries.cantonal.map(q =>
-    this.mcpCall("cantonal-courts", "search", q)
+    this.mcpCall("entscheidsuche", "search", q)
   );
 
   const [bgeResults, ...cantonalResults] = await Promise.all([
@@ -833,4 +834,4 @@ Beschaffenheit.
 
 ---
 
-*Specification for /agent:researcher implementation*
+*Specification for /agent-researcher implementation*

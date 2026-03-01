@@ -1,6 +1,6 @@
 # Erste Schritte mit BetterCallClaude
 
-**Rechtliche Intelligenz für Schweizer Anwälte** - Version 1.3.2
+**Rechtliche Intelligenz für Schweizer Anwälte** - Version 3.1.0
 
 ---
 
@@ -17,7 +17,7 @@ BetterCallClaude ist ein umfassendes Framework für rechtliche Intelligenz, das 
 
 ---
 
-## Neu in v1.3.2
+## Neu in v3.1.0
 
 ### Intelligenter Proxy (`/legal`)
 - **Natürliche Sprache**: Beschreiben Sie Ihr Anliegen einfach in Ihren Worten
@@ -153,11 +153,11 @@ Der einfachste Weg, BetterCallClaude zu nutzen, ist der `/legal` intelligente Pr
 
 | Befehl | Beschreibung |
 |--------|--------------|
-| `/legal:research` | Schweizer Rechtsquellen durchsuchen |
-| `/legal:analyze` | Rechtliche Argumente analysieren |
-| `/legal:compare` | Präzedenzfälle vergleichen |
-| `/legal:strategy` | Prozessstrategie entwickeln |
-| `/legal:draft` | Rechtsdokumente erstellen |
+| `/legal-research` | Schweizer Rechtsquellen durchsuchen |
+| `/legal-strategy` | Prozessstrategie entwickeln |
+| `/legal-draft` | Rechtsdokumente erstellen |
+| `/legal-doc-analyze` | Rechtliche Dokumente analysieren |
+| `/legal-precedent` | Präzedenzfälle recherchieren |
 
 ### Agent-Befehle
 
@@ -171,9 +171,9 @@ Der einfachste Weg, BetterCallClaude zu nutzen, ist der `/legal` intelligente Pr
 
 | Befehl | Beschreibung |
 |--------|--------------|
-| `/legal:help` | Befehlshilfe anzeigen |
-| `/legal:federal` | Bundesrecht-Modus erzwingen |
-| `/legal:cantonal [KANTON]` | Kantonalrecht-Modus erzwingen |
+| `/legal-help` | Befehlshilfe anzeigen |
+| `/legal-federal` | Bundesrecht-Modus erzwingen |
+| `/legal-cantonal [KANTON]` | Kantonalrecht-Modus erzwingen |
 
 ---
 
@@ -214,7 +214,7 @@ claude
 
 ## Unterstützte Kantone
 
-BetterCallClaude v1.3.2 unterstützt alle 26 Schweizer Kantone:
+BetterCallClaude v3.1.0 unterstützt alle 26 Schweizer Kantone:
 
 | Deutschsprachig | Französischsprachig | Italienisch/Rätoromanisch |
 |-----------------|---------------------|---------------------------|
@@ -263,7 +263,7 @@ npm run build
 ```
 
 ### Falscher Kanton angewendet
-- Alle 26 Kantone werden in v1.3.2 unterstützt
+- Alle 26 Kantone werden in v3.1.0 unterstützt
 - Verwenden Sie Standard-Kantonskürzel (ZH, BE, GE, etc.)
 - Explizite Erwähnung: "gemäss ZH-Recht"
 
@@ -272,7 +272,7 @@ npm run build
 ## Weitere Ressourcen
 
 - [Englische Dokumentation](../../getting-started.md)
-- [Befehlsreferenz](../../.claude/commands/legal:help.md)
+- [Befehlsreferenz](/legal-help)
 - [GitHub Repository](https://github.com/fedec65/bettercallclaude)
 
 ---
@@ -291,4 +291,4 @@ npm run build
 
 ---
 
-*BetterCallClaude v1.3.2 - Rechtliche Intelligenz für die Schweizer Anwaltschaft*
+*BetterCallClaude v3.1.0 - Rechtliche Intelligenz für die Schweizer Anwaltschaft*

@@ -1,6 +1,6 @@
 # Windows Installation Guide
 
-**BetterCallClaude v2.2.0** - Native Windows Installation
+**BetterCallClaude v3.1.0** - Native Windows Installation
 
 This guide covers installing BetterCallClaude on Windows using the PowerShell installer. For WSL users, see the [standard installation guide](getting-started.md).
 
@@ -500,8 +500,8 @@ bettercallclaude update
 After installation:
 
 1. **Start Claude Code**: Open a terminal and run `claude`
-2. **Try a command**: Type `/legal:help` to see available commands
-3. **Search BGE**: Try `/legal:research Art. 97 OR`
+2. **Try a command**: Type `/legal-help` to see available commands
+3. **Search BGE**: Try `/legal-research Art. 97 OR`
 4. **Read the docs**: Check out the [Getting Started Guide](getting-started.md)
 
 ---
@@ -514,6 +514,6 @@ After installation:
 
 ---
 
-**BetterCallClaude v2.2.0** - Built for Swiss Legal Professionals
+**BetterCallClaude v3.1.0** - Built for Swiss Legal Professionals
 
-*Windows installation documentation - Last updated: January 2026*
+*Windows installation documentation - Last updated: March 2026*

@@ -1232,4 +1232,4 @@ Before finalizing any legal document, verify:
 
 **Create professional Swiss legal documents with BetterCallClaude** ✍️
 
-*Legal Drafter Persona - BetterCallClaude v1.0.0-alpha*
+*Legal Drafter Persona - BetterCallClaude v3.1.0*

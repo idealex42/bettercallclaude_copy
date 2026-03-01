@@ -1,6 +1,6 @@
 # BetterCallClaude Installation Guide
 
-**Version 2.2.1** | Complete step-by-step installation for Windows and macOS
+**Version 3.1.0** | Complete step-by-step installation for Windows and macOS
 
 ---
 
@@ -184,7 +184,7 @@ bettercallclaude doctor
 ✅ MCP servers configured
 ✅ Command files linked
 ✅ Dependencies installed
-✅ Version: 2.2.1
+✅ Version: 3.1.0
 
 All checks passed!
 ```
@@ -197,7 +197,7 @@ bettercallclaude version
 
 **Expected output:**
 ```
-BetterCallClaude v2.2.1
+BetterCallClaude v3.1.0
 ```
 
 ### Test a Command in Claude
@@ -364,4 +364,4 @@ For a complete command reference, see the [Cheatsheet](../bettercallclaude_cheat
 
 ---
 
-**BetterCallClaude v2.2.1** — Built for Swiss Legal Professionals
+**BetterCallClaude v3.1.0** — Built for Swiss Legal Professionals

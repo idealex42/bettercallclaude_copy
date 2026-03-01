@@ -1,6 +1,6 @@
 # BetterCallClaude Agent Architecture
 
-> **Version**: 1.0.0-draft
+> **Version**: v3.1.0
 > **Status**: Approved for Implementation
 > **Last Updated**: 2025-11-25
 
@@ -47,7 +47,8 @@ BetterCallClaude implements a **dual-interface architecture** combining granular
 ├─────────────────────────────────────────────────────────────────┤
 │                     SHARED INFRASTRUCTURE                       │
 ├─────────────────────────────────────────────────────────────────┤
-│  MCP Servers: entscheidsuche, bge-search, legal-citations       │
+│  MCP Servers: bge-search, entscheidsuche, fedlex-sparql,        │
+│               legal-citations, onlinekommentar                  │
 │  Case Context: Serena memory persistence                        │
 │  Verification: Citation validation layer                        │
 │  Audit: Anwaltsgeheimnis-compliant logging                      │
@@ -72,7 +73,7 @@ BetterCallClaude implements a **dual-interface architecture** combining granular
 
 | Agent | Purpose | Complexity | MCP Dependencies |
 |-------|---------|------------|------------------|
-| `/agent-researcher` | Deep legal research with multi-source synthesis | High | entscheidsuche, bge-search, cantonal-courts |
+| `/agent-researcher` | Deep legal research with multi-source synthesis | High | entscheidsuche, bge-search, fedlex-sparql |
 | `/agent-strategist` | Case strategy and risk assessment | High | All research MCPs + legal-citations |
 | `/agent-drafter` | Swiss-compliant document generation | Medium-High | legal-citations, templates |
 
@@ -553,13 +554,11 @@ See `src/agents/base.py` and `src/agents/base.ts` for implementation.
 
 | MCP Server | Purpose | Status |
 |------------|---------|--------|
-| entscheidsuche | Swiss court decision search | Planned |
-| bge-search | Federal Supreme Court search | Planned |
-| cantonal-courts | Canton-specific courts | Planned |
-| legal-citations | Citation extraction/verification | Planned |
-| commercial-registry | Zefix/HR integration | Planned |
-| land-registry | Grundbuch integration | Planned |
-| legal-news | Legal news aggregation | Planned |
+| bge-search | Federal Supreme Court search | Implemented |
+| entscheidsuche | Swiss court decision search (incl. cantonal) | Implemented |
+| fedlex-sparql | Federal law SPARQL queries | Implemented |
+| legal-citations | Citation extraction/verification | Implemented |
+| onlinekommentar | Legal commentary search | Implemented |
 
 ### Performance Requirements
 

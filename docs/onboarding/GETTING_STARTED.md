@@ -54,7 +54,7 @@ After installation, **completely restart Claude Desktop** (quit and reopen) to l
 
    Or use a specific command:
    ```
-   /legal:research employment law dismissal protection
+   /legal-research employment law dismissal protection
    ```
 
 ### Option B: With Claude Code CLI
@@ -66,7 +66,7 @@ After installation, **completely restart Claude Desktop** (quit and reopen) to l
    ```
 3. **Use legal commands:**
    ```
-   /legal:help
+   /legal-help
    ```
 
 ---
@@ -77,39 +77,45 @@ Here are some commands to try right away:
 
 ### Get Help
 ```
-/legal:help
+/legal-help
 ```
 Shows all available legal commands and their descriptions.
 
 ### Legal Research
 ```
-/legal:research [your topic]
+/legal-research [your topic]
 ```
-Example: `/legal:research tenant rights Switzerland`
+Example: `/legal-research tenant rights Switzerland`
 
 ### Find Federal Court Decisions
 ```
-/legal:bge [citation or topic]
+/legal-federal [citation or topic]
 ```
-Example: `/legal:bge BGE 147 III 226`
+Example: `/legal-federal BGE 147 III 226`
 
 ### Cantonal Court Search
 ```
-/legal:cantonal [canton] [topic]
+/legal-cantonal [canton] [topic]
 ```
-Example: `/legal:cantonal ZH rental disputes`
+Example: `/legal-cantonal ZH rental disputes`
 
 ### Case Strategy
 ```
-/legal:strategy [describe your case]
+/legal-strategy [describe your case]
 ```
 Get strategic analysis and recommendations for your case.
 
 ### Draft Legal Documents
 ```
-/legal:draft [document type] [details]
+/legal-draft [document type] [details]
 ```
-Example: `/legal:draft contract termination notice`
+Example: `/legal-draft contract termination notice`
+
+### Check Version
+```
+/legal-version
+```
+Display the current BetterCallClaude version and component status.
 
 ---
 
@@ -125,6 +131,18 @@ BetterCallClaude includes specialized AI agents for different tasks. Call them w
 | `@compliance` | Regulatory compliance checks |
 | `@risk` | Risk assessment and mitigation |
 | `@translator` | Legal translation (DE/FR/IT/EN) |
+| `@adversary` | Opposing counsel simulation and counterarguments |
+| `@advocate` | Client representation and argumentation |
+| `@briefing` | Legal briefing preparation |
+| `@cantonal` | Cantonal law specialist |
+| `@citation` | Legal citation formatting and validation |
+| `@corporate` | Corporate and commercial law |
+| `@data-protection` | Data protection and privacy law |
+| `@fiscal` | Tax and fiscal law |
+| `@judicial` | Court procedure and judicial processes |
+| `@orchestrator` | Multi-agent workflow coordination |
+| `@procedure` | Procedural law and litigation steps |
+| `@realestate` | Real estate and property law |
 
 **Example:**
 ```
@@ -147,14 +165,13 @@ BetterCallClaude supports all 26 Swiss cantons:
 
 ---
 
-## Language Modes
+## Language Support
 
-Switch between languages using:
+BetterCallClaude works in German, French, Italian, and English. Use the translation command for legal translations:
 
-- **German mode:** `/legal:mode de`
-- **French mode:** `/legal:mode fr`
-- **Italian mode:** `/legal:mode it`
-- **English mode:** `/legal:mode en`
+```
+/legal-translate [source language] [target language] [text]
+```
 
 Or simply write your queries in your preferred language - BetterCallClaude will adapt automatically.
 
@@ -170,8 +187,8 @@ Or simply write your queries in your preferred language - BetterCallClaude will 
 
 ### Commands not recognized?
 
-1. Try `/legal:help` to see available commands
-2. Make sure you're using the correct syntax (note the colon after `legal`)
+1. Try `/legal-help` to see available commands
+2. Make sure you're using the correct syntax (note the hyphen after `legal`)
 
 ### Need more help?
 
@@ -184,18 +201,28 @@ Or simply write your queries in your preferred language - BetterCallClaude will 
 
 | Task | Command |
 |------|---------|
-| Get help | `/legal:help` |
-| Research | `/legal:research [topic]` |
-| BGE search | `/legal:bge [citation/topic]` |
-| Cantonal search | `/legal:cantonal [canton] [topic]` |
-| Case strategy | `/legal:strategy [case details]` |
-| Draft document | `/legal:draft [type] [details]` |
-| Change language | `/legal:mode [de/fr/it/en]` |
+| Get help | `/legal-help` |
+| Gateway (all-in-one) | `/legal [query]` |
+| Research | `/legal-research [topic]` |
+| Federal court search | `/legal-federal [citation/topic]` |
+| Cantonal search | `/legal-cantonal [canton] [topic]` |
+| Case strategy | `/legal-strategy [case details]` |
+| Draft document | `/legal-draft [type] [details]` |
+| Cite / format citation | `/legal-cite [citation]` |
+| Analyze document | `/legal-doc-analyze [document]` |
+| Legal briefing | `/legal-briefing [topic]` |
+| Find precedent | `/legal-precedent [issue]` |
+| Validate compliance | `/legal-validate [document]` |
+| Translate | `/legal-translate [lang] [text]` |
+| Adversarial analysis | `/legal-adversarial [case]` |
+| Workflow management | `/legal-workflow [task]` |
+| Setup | `/legal-setup` |
+| Version info | `/legal-version` |
 
 ---
 
-**Ready to start?** Open Claude and try: `/legal:help`
+**Ready to start?** Open Claude and try: `/legal-help`
 
 ---
 
-*BetterCallClaude v1.3.2 - Legal Intelligence Framework for Swiss Lawyers*
+*BetterCallClaude v3.1.0 - Legal Intelligence Framework for Swiss Lawyers*

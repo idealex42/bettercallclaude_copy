@@ -65,13 +65,24 @@ Result:
 
 **How it works**: Use `/legal-` prefix to explicitly force framework activation
 
-**Available Commands**:
-- `/legal-research` - Legal Researcher persona
-- `/legal-strategy` - Case Strategist persona
+**Available Commands** (17 commands):
+- `/legal` - Gateway command (routes to specialized commands)
+- `/legal-adversarial` - Adversarial analysis mode
+- `/legal-briefing` - Legal briefing sessions
+- `/legal-cantonal [CANTON]` - Cantonal Law Mode (all 26 cantons)
+- `/legal-cite` - Citation formatting
+- `/legal-doc-analyze` - Document analysis
 - `/legal-draft` - Legal Drafter persona
 - `/legal-federal` - Federal Law Mode
-- `/legal-cantonal [ZH|BE|GE|BS|VD|TI]` - Cantonal Law Mode
 - `/legal-help` - Command reference
+- `/legal-precedent` - Precedent research
+- `/legal-research` - Legal Researcher persona
+- `/legal-setup` - Setup and configuration
+- `/legal-strategy` - Case Strategist persona
+- `/legal-translate` - Legal translation (DE/FR/IT/EN)
+- `/legal-validate` - Citation validation
+- `/legal-version` - Version information
+- `/legal-workflow` - Workflow templates
 
 **Example**:
 ```
@@ -281,16 +292,36 @@ Art. 97 OR liability in Zürich commercial case
 
 **Forces**: Specific cantonal law analysis
 
-**Supported Cantons** (v1.0):
+**Supported Cantons** (v3.1.0 — all 26 cantons):
 
 | Code | Canton | Language | Legal System |
 |------|--------|----------|--------------|
 | **ZH** | Zürich | German | Commercial law hub |
 | **BE** | Bern | DE/FR | Bilingual, capital |
-| **GE** | Genève | French | International law |
+| **LU** | Luzern | German | Central Switzerland |
+| **UR** | Uri | German | Central Switzerland |
+| **SZ** | Schwyz | German | Central Switzerland |
+| **OW** | Obwalden | German | Central Switzerland |
+| **NW** | Nidwalden | German | Central Switzerland |
+| **GL** | Glarus | German | Eastern Switzerland |
+| **ZG** | Zug | German | Corporate & finance hub |
+| **FR** | Fribourg | DE/FR | Bilingual canton |
+| **SO** | Solothurn | German | Northwestern Switzerland |
 | **BS** | Basel-Stadt | German | Pharmaceutical law |
-| **VD** | Vaud | French | Western Switzerland |
+| **BL** | Basel-Landschaft | German | Northwestern Switzerland |
+| **SH** | Schaffhausen | German | Northern Switzerland |
+| **AR** | Appenzell Ausserrhoden | German | Eastern Switzerland |
+| **AI** | Appenzell Innerrhoden | German | Eastern Switzerland |
+| **SG** | St. Gallen | German | Eastern Switzerland |
+| **GR** | Graubünden | DE/RM/IT | Trilingual canton |
+| **AG** | Aargau | German | Northwestern Switzerland |
+| **TG** | Thurgau | German | Eastern Switzerland |
 | **TI** | Ticino | Italian | Southern Switzerland |
+| **VD** | Vaud | French | Western Switzerland |
+| **VS** | Valais | DE/FR | Bilingual canton |
+| **NE** | Neuchâtel | French | Western Switzerland |
+| **GE** | Genève | French | International law |
+| **JU** | Jura | French | Western Switzerland |
 
 **Usage**:
 ```bash
@@ -550,8 +581,8 @@ Enforceability Assessment:
 **Issue**: Command doesn't activate framework
 
 **Solutions**:
-1. Check syntax: `/legal-research` not `/legal research` (no space after colon)
-2. Verify canton code: Valid codes are ZH, BE, GE, BS, VD, TI
+1. Check syntax: `/legal-research` not `/legal research` (use hyphens, not spaces)
+2. Verify canton code: All 26 Swiss canton codes are supported (e.g., ZH, BE, GE, BS, VD, TI, LU, SG, AG, etc.)
 3. Ensure command is on new line or at start of message
 
 **Example**:
@@ -560,7 +591,7 @@ Enforceability Assessment:
 ✅ Right: /legal-research Art. 97 OR
 
 ❌ Wrong: /legal-cantonal ZU  # Invalid canton code
-✅ Right: /legal-cantonal ZH
+✅ Right: /legal-cantonal ZH  # Any of the 26 canton codes
 ```
 
 ### Auto-Detection Not Activating
@@ -620,12 +651,23 @@ Analyse juridique en français...
 
 | Command | Activates | Use Case |
 |---------|-----------|----------|
-| `/legal-research` | Legal Researcher | BGE search, statutory analysis |
-| `/legal-strategy` | Case Strategist | Litigation planning, risk assessment |
+| `/legal` | Gateway Command | Routes to specialized commands |
+| `/legal-adversarial` | Adversarial Analysis | Challenge arguments, stress-test positions |
+| `/legal-briefing` | Legal Briefing | Structured briefing sessions |
+| `/legal-cantonal [CANTON]` | Cantonal Law Mode | Force specific canton law (all 26 cantons) |
+| `/legal-cite` | Citation Formatter | Format and verify legal citations |
+| `/legal-doc-analyze` | Document Analysis | Analyze legal documents |
 | `/legal-draft` | Legal Drafter | Contracts, court submissions |
 | `/legal-federal` | Federal Law Mode | Force federal law exclusively |
-| `/legal-cantonal [ZH\|BE\|GE\|BS\|VD\|TI]` | Cantonal Law Mode | Force specific canton law |
-| `/legal-help` | Help System | Show this reference |
+| `/legal-help` | Help System | Show command reference |
+| `/legal-precedent` | Precedent Research | BGE/ATF/DTF precedent search |
+| `/legal-research` | Legal Researcher | General legal research, statutory analysis |
+| `/legal-setup` | Setup & Config | Setup and configuration |
+| `/legal-strategy` | Case Strategist | Litigation planning, risk assessment |
+| `/legal-translate` | Legal Translation | Translate legal texts (DE/FR/IT/EN) |
+| `/legal-validate` | Citation Validation | Validate legal citations |
+| `/legal-version` | Version Info | Show version information |
+| `/legal-workflow` | Workflow Templates | Access predefined legal workflows |
 
 ---
 
@@ -640,6 +682,6 @@ Analyse juridique en français...
 
 ---
 
-**BetterCallClaude v1.0.0-alpha - Professional Legal Intelligence Framework**
+**BetterCallClaude v3.1.0 - Professional Legal Intelligence Framework**
 
-For support: [GitHub Issues](https://github.com/yourusername/bettercallclaude/issues)
+For support: [GitHub Issues](https://github.com/fedec65/bettercallclaude/issues)

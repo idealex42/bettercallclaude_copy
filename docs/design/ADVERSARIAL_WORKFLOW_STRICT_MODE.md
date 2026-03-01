@@ -1534,5 +1534,5 @@ This adversarial workflow design provides BetterCallClaude with a robust mechani
 
 **Design Status**: ✅ Architecture Complete
 **Next Phase**: Implementation Planning
-**Framework**: BetterCallClaude v1.0.0-alpha
+**Framework**: BetterCallClaude v3.1.0
 **Document Version**: 1.0 (2025-01-05)

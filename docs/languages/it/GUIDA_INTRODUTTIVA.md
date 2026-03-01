@@ -54,7 +54,7 @@ Dopo l'installazione, **riavvia completamente Claude Desktop** (chiudi e riapri)
 
    Oppure usa un comando specifico:
    ```
-   /legal:research diritto del lavoro protezione dal licenziamento
+   /legal-research diritto del lavoro protezione dal licenziamento
    ```
 
 ### Opzione B: Con Claude Code CLI
@@ -66,7 +66,7 @@ Dopo l'installazione, **riavvia completamente Claude Desktop** (chiudi e riapri)
    ```
 3. **Usa i comandi legali:**
    ```
-   /legal:help
+   /legal-help
    ```
 
 ---
@@ -77,39 +77,39 @@ Ecco alcuni comandi da provare subito:
 
 ### Ottenere Aiuto
 ```
-/legal:help
+/legal-help
 ```
 Mostra tutti i comandi legali disponibili e le loro descrizioni.
 
 ### Ricerca Legale
 ```
-/legal:research [il tuo argomento]
+/legal-research [il tuo argomento]
 ```
-Esempio: `/legal:research diritto locativo disdetta`
+Esempio: `/legal-research diritto locativo disdetta`
 
 ### Cercare Decisioni del Tribunale Federale
 ```
-/legal:bge [citazione o argomento]
+/legal-research [citazione o argomento]
 ```
-Esempio: `/legal:bge DTF 147 III 226`
+Esempio: `/legal-research DTF 147 III 226`
 
 ### Ricerca Cantonale
 ```
-/legal:cantonal [cantone] [argomento]
+/legal-cantonal [cantone] [argomento]
 ```
-Esempio: `/legal:cantonal TI controversie locative`
+Esempio: `/legal-cantonal TI controversie locative`
 
 ### Strategia del Caso
 ```
-/legal:strategy [descrivi il tuo caso]
+/legal-strategy [descrivi il tuo caso]
 ```
 Ottieni analisi strategiche e raccomandazioni per il tuo caso.
 
 ### Redigere Documenti Legali
 ```
-/legal:draft [tipo di documento] [dettagli]
+/legal-draft [tipo di documento] [dettagli]
 ```
-Esempio: `/legal:draft lettera di disdetta contratto di lavoro`
+Esempio: `/legal-draft lettera di disdetta contratto di lavoro`
 
 ---
 
@@ -149,14 +149,9 @@ BetterCallClaude supporta tutti i 26 cantoni svizzeri:
 
 ## Modalità Linguistiche
 
-Cambia lingua usando:
+BetterCallClaude si adatta automaticamente alla tua lingua preferita. Scrivi semplicemente le tue richieste in tedesco, francese, italiano o inglese.
 
-- **Modalità tedesca:** `/legal:mode de`
-- **Modalità francese:** `/legal:mode fr`
-- **Modalità italiana:** `/legal:mode it`
-- **Modalità inglese:** `/legal:mode en`
-
-Oppure scrivi semplicemente le tue richieste nella lingua preferita - BetterCallClaude si adatterà automaticamente.
+Usa `/legal-translate` per le traduzioni giuridiche tra le lingue ufficiali.
 
 ---
 
@@ -170,8 +165,8 @@ Oppure scrivi semplicemente le tue richieste nella lingua preferita - BetterCall
 
 ### Comandi non riconosciuti?
 
-1. Prova `/legal:help` per vedere i comandi disponibili
-2. Assicurati di usare la sintassi corretta (nota i due punti dopo `legal`)
+1. Prova `/legal-help` per vedere i comandi disponibili
+2. Assicurati di usare la sintassi corretta (nota il trattino dopo `legal`)
 
 ### Hai bisogno di ulteriore aiuto?
 
@@ -184,18 +179,17 @@ Oppure scrivi semplicemente le tue richieste nella lingua preferita - BetterCall
 
 | Attività | Comando |
 |----------|---------|
-| Ottenere aiuto | `/legal:help` |
-| Ricerca | `/legal:research [argomento]` |
-| Ricerca DTF | `/legal:bge [citazione/argomento]` |
-| Ricerca cantonale | `/legal:cantonal [cantone] [argomento]` |
-| Strategia del caso | `/legal:strategy [dettagli del caso]` |
-| Redigere documento | `/legal:draft [tipo] [dettagli]` |
-| Cambiare lingua | `/legal:mode [de/fr/it/en]` |
+| Ottenere aiuto | `/legal-help` |
+| Ricerca | `/legal-research [argomento]` |
+| Ricerca cantonale | `/legal-cantonal [cantone] [argomento]` |
+| Strategia del caso | `/legal-strategy [dettagli del caso]` |
+| Redigere documento | `/legal-draft [tipo] [dettagli]` |
+| Tradurre | `/legal-translate [testo]` |
 
 ---
 
-**Pronto per iniziare?** Apri Claude e prova: `/legal:help`
+**Pronto per iniziare?** Apri Claude e prova: `/legal-help`
 
 ---
 
-*BetterCallClaude v1.3.2 - Framework di Intelligenza Legale per Avvocati Svizzeri*
+*BetterCallClaude v3.1.0 - Framework di Intelligenza Legale per Avvocati Svizzeri*

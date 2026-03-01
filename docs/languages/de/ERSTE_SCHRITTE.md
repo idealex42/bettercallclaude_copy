@@ -54,7 +54,7 @@ Nach der Installation **starten Sie Claude Desktop vollständig neu** (beenden u
 
    Oder verwenden Sie einen spezifischen Befehl:
    ```
-   /legal:research Arbeitsrecht Kündigungsschutz
+   /legal-research Arbeitsrecht Kündigungsschutz
    ```
 
 ### Option B: Mit Claude Code CLI
@@ -66,7 +66,7 @@ Nach der Installation **starten Sie Claude Desktop vollständig neu** (beenden u
    ```
 3. **Verwenden Sie Rechtsbefehle:**
    ```
-   /legal:help
+   /legal-help
    ```
 
 ---
@@ -77,39 +77,39 @@ Hier sind einige Befehle zum sofortigen Ausprobieren:
 
 ### Hilfe aufrufen
 ```
-/legal:help
+/legal-help
 ```
 Zeigt alle verfügbaren Rechtsbefehle und deren Beschreibungen.
 
 ### Rechtsrecherche
 ```
-/legal:research [Ihr Thema]
+/legal-research [Ihr Thema]
 ```
-Beispiel: `/legal:research Mietrecht Kündigung`
+Beispiel: `/legal-research Mietrecht Kündigung`
 
 ### Bundesgerichtsentscheide suchen
 ```
-/legal:bge [Zitation oder Thema]
+/legal-research [Zitation oder Thema]
 ```
-Beispiel: `/legal:bge BGE 147 III 226`
+Beispiel: `/legal-research BGE 147 III 226`
 
 ### Kantonale Gerichtsentscheide
 ```
-/legal:cantonal [Kanton] [Thema]
+/legal-cantonal [Kanton] [Thema]
 ```
-Beispiel: `/legal:cantonal ZH Mietstreitigkeiten`
+Beispiel: `/legal-cantonal ZH Mietstreitigkeiten`
 
 ### Fallstrategie
 ```
-/legal:strategy [beschreiben Sie Ihren Fall]
+/legal-strategy [beschreiben Sie Ihren Fall]
 ```
 Erhalten Sie strategische Analysen und Empfehlungen für Ihren Fall.
 
 ### Rechtsdokumente entwerfen
 ```
-/legal:draft [Dokumenttyp] [Details]
+/legal-draft [Dokumenttyp] [Details]
 ```
-Beispiel: `/legal:draft Kündigungsschreiben Arbeitsvertrag`
+Beispiel: `/legal-draft Kündigungsschreiben Arbeitsvertrag`
 
 ---
 
@@ -149,14 +149,9 @@ BetterCallClaude unterstützt alle 26 Schweizer Kantone:
 
 ## Sprachmodi
 
-Wechseln Sie zwischen Sprachen mit:
+BetterCallClaude passt sich automatisch an Ihre bevorzugte Sprache an. Schreiben Sie Ihre Anfragen einfach auf Deutsch, Französisch, Italienisch oder Englisch.
 
-- **Deutscher Modus:** `/legal:mode de`
-- **Französischer Modus:** `/legal:mode fr`
-- **Italienischer Modus:** `/legal:mode it`
-- **Englischer Modus:** `/legal:mode en`
-
-Oder schreiben Sie Ihre Anfragen einfach in Ihrer bevorzugten Sprache - BetterCallClaude passt sich automatisch an.
+Verwenden Sie `/legal-translate` für juristische Übersetzungen zwischen den Amtssprachen.
 
 ---
 
@@ -170,8 +165,8 @@ Oder schreiben Sie Ihre Anfragen einfach in Ihrer bevorzugten Sprache - BetterCa
 
 ### Befehle werden nicht erkannt?
 
-1. Versuchen Sie `/legal:help` um verfügbare Befehle zu sehen
-2. Stellen Sie sicher, dass Sie die korrekte Syntax verwenden (beachten Sie den Doppelpunkt nach `legal`)
+1. Versuchen Sie `/legal-help` um verfügbare Befehle zu sehen
+2. Stellen Sie sicher, dass Sie die korrekte Syntax verwenden (beachten Sie den Bindestrich nach `legal`)
 
 ### Weitere Hilfe benötigt?
 
@@ -184,18 +179,17 @@ Oder schreiben Sie Ihre Anfragen einfach in Ihrer bevorzugten Sprache - BetterCa
 
 | Aufgabe | Befehl |
 |---------|--------|
-| Hilfe aufrufen | `/legal:help` |
-| Recherche | `/legal:research [Thema]` |
-| BGE-Suche | `/legal:bge [Zitation/Thema]` |
-| Kantonale Suche | `/legal:cantonal [Kanton] [Thema]` |
-| Fallstrategie | `/legal:strategy [Falldetails]` |
-| Dokument entwerfen | `/legal:draft [Typ] [Details]` |
-| Sprache wechseln | `/legal:mode [de/fr/it/en]` |
+| Hilfe aufrufen | `/legal-help` |
+| Recherche | `/legal-research [Thema]` |
+| Kantonale Suche | `/legal-cantonal [Kanton] [Thema]` |
+| Fallstrategie | `/legal-strategy [Falldetails]` |
+| Dokument entwerfen | `/legal-draft [Typ] [Details]` |
+| Übersetzen | `/legal-translate [Text]` |
 
 ---
 
-**Bereit loszulegen?** Öffnen Sie Claude und versuchen Sie: `/legal:help`
+**Bereit loszulegen?** Öffnen Sie Claude und versuchen Sie: `/legal-help`
 
 ---
 
-*BetterCallClaude v1.3.2 - Legal Intelligence Framework für Schweizer Anwälte*
+*BetterCallClaude v3.1.0 - Legal Intelligence Framework für Schweizer Anwälte*

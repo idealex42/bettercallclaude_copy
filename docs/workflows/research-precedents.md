@@ -512,11 +512,11 @@ Before finalizing your research, verify:
 
 Questions about legal research workflows?
 
-- [GitHub Discussions](https://github.com/yourusername/bettercallclaude/discussions)
-- [Report Issues](https://github.com/yourusername/bettercallclaude/issues)
+- [GitHub Discussions](https://github.com/fedec65/bettercallclaude/discussions)
+- [Report Issues](https://github.com/fedec65/bettercallclaude/issues)
 
 ---
 
 **Master Swiss legal research with BetterCallClaude** 📚
 
-*Legal Researcher Persona - BetterCallClaude v1.0.0-alpha*
+*Legal Researcher Persona - BetterCallClaude v3.1.0*

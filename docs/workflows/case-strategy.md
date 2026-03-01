@@ -466,4 +466,4 @@ Final Position: CHF 125,000 minimum
 
 **Develop winning strategies with BetterCallClaude** ⚔️
 
-*Case Strategist Persona - BetterCallClaude v1.0.0-alpha*
+*Case Strategist Persona - BetterCallClaude v3.1.0*
