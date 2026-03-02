@@ -407,7 +407,12 @@ MCP servers are pre-compiled and included in the plugin. No build step is requir
 
 ## Tutorials
 
-- [Employment Case Walkthrough](docs/tutorials/employment-case-walkthrough.md) — End-to-end tutorial following a wrongful termination case (missbräuchliche Kündigung) from intake through document delivery, demonstrating 10 agents, 5 commands, 4 skills, and 4 MCP servers.
+End-to-end tutorial following a wrongful termination case from intake through document delivery, demonstrating 10 agents, 5 commands, 4 skills, and 4 MCP servers.
+
+- [Employment Case Walkthrough](docs/tutorials/employment-case-walkthrough.md) (English)
+- [Arbeitsrecht-Fallbeispiel: Missbräuchliche Kündigung](docs/tutorials/arbeitsrecht-fallbeispiel.md) (Deutsch)
+- [Cas pratique : licenciement abusif](docs/tutorials/cas-pratique-droit-du-travail.md) (Français)
+- [Caso pratico: disdetta abusiva](docs/tutorials/caso-pratico-diritto-del-lavoro.md) (Italiano)
 
 ---
 
