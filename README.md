@@ -405,6 +405,12 @@ MCP servers are pre-compiled and included in the plugin. No build step is requir
 
 ---
 
+## Tutorials
+
+- [Employment Case Walkthrough](docs/tutorials/employment-case-walkthrough.md) — End-to-end tutorial following a wrongful termination case (missbräuchliche Kündigung) from intake through document delivery, demonstrating 10 agents, 5 commands, 4 skills, and 4 MCP servers.
+
+---
+
 ## Privacy Protection
 
 BetterCallClaude includes built-in Anwaltsgeheimnis (attorney-client privilege) compliance.

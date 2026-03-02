@@ -755,6 +755,7 @@ Activate the right persona for your task:
 
 ### Explore Advanced Features
 
+- [Employment Case Walkthrough](tutorials/employment-case-walkthrough.md) - End-to-end tutorial following a wrongful termination case through the full BCC pipeline
 - [Legal Research Workflow](workflows/research-precedents.md) - Deep dive into BGE precedent research
 - [Case Strategy Workflow](workflows/case-strategy.md) - Advanced litigation strategy development
 - [Document Drafting Workflow](workflows/draft-contracts.md) - Professional document creation
