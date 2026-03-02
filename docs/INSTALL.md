@@ -241,6 +241,42 @@ MCP server configuration is per-machine and cannot be shared through the reposit
 
 ---
 
+## 4.1 Starting a New Case
+
+After installing BetterCallClaude, create a project directory for each case and populate it with the case template:
+
+1. Create a directory for the case:
+
+   ```
+   mkdir ~/cases/keller-v-techcorp
+   ```
+
+2. Copy the template into the directory as `CLAUDE.md`:
+
+   ```
+   cp docs/templates/case-claude-md.md ~/cases/keller-v-techcorp/CLAUDE.md
+   ```
+
+   If you installed from the marketplace (not a local clone), download the template from GitHub:
+
+   ```
+   curl -fsSL https://raw.githubusercontent.com/fedec65/bettercallclaude/main/docs/templates/case-claude-md.md \
+     -o ~/cases/keller-v-techcorp/CLAUDE.md
+   ```
+
+3. Open `CLAUDE.md` in a text editor and fill in the `[REPLACE: ...]` placeholders: matter title, jurisdiction, canton, parties, key dates, applicable statutes, and privacy mode.
+
+4. Start Claude in that directory:
+
+   ```
+   cd ~/cases/keller-v-techcorp
+   claude
+   ```
+
+5. The briefing coordinator reads your `CLAUDE.md` on startup and skips questions you have already answered, going directly to the gaps that remain.
+
+---
+
 ## 5. Manual / Developer Installation
 
 ### 5.1 Run from a Local Clone

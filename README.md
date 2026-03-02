@@ -413,6 +413,19 @@ End-to-end tutorial following a wrongful termination case from intake through do
 - [Arbeitsrecht-Fallbeispiel: Missbräuchliche Kündigung](docs/tutorials/arbeitsrecht-fallbeispiel.md) (Deutsch)
 - [Cas pratique : licenciement abusif](docs/tutorials/cas-pratique-droit-du-travail.md) (Français)
 - [Caso pratico: disdetta abusiva](docs/tutorials/caso-pratico-diritto-del-lavoro.md) (Italiano)
+- [BetterCallClaude vs. Anthropic Legal Plugin](docs/tutorials/plugin-comparison-keller-case.md) — Side-by-side comparison using the same case
+
+### Starting a New Case
+
+Copy the case template to your project directory and fill in the case details:
+
+```
+cp docs/templates/case-claude-md.md /path/to/my-case/CLAUDE.md
+cd /path/to/my-case
+claude
+```
+
+The template pre-populates case context, privacy settings, and workflow preferences so that BetterCallClaude's agents start with the right information. See [docs/templates/case-claude-md.md](docs/templates/case-claude-md.md) for the template.
 
 ---
 
