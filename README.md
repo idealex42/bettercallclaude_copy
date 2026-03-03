@@ -8,7 +8,7 @@ The plugin covers the full spectrum of Swiss legal work: BGE/ATF/DTF precedent r
 
 **Version**: 3.1.0 -- 19 agents, 18 commands, 10 skills, 6 MCP servers.
 
-> Love BetterCallClaude? Support the project — [**Buy me a coffee**](https://buymeacoffee.com/federicocesconi) ☕
+> Love BetterCallClaude? Support the project — [**Buy him a coffee**](https://buymeacoffee.com/federicocesconi) ☕
 
 ---
 
